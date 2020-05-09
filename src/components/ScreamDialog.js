@@ -10,14 +10,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import LikeButton from './LikeButton';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 const styles = {
     profileImage: {
-        maxWidth: '200px', 
-        height: '200px', 
+        maxWidth: '200px',
+        height: '200px',
         borderRadius: '50%',
         marginRight: '20px'
-    }, 
+    },
     closeButton: {
         position: 'absolute',
         right: '0',
@@ -27,17 +29,17 @@ const styles = {
         color: "black"
     },
     dialog: {
-        position: 'relative', 
-        minWidth: '500px', 
+        position: 'relative',
+        minWidth: '500px',
         padding: '50px'
-    }, 
-    progress: { 
+    },
+    progress: {
         margin: '20px'
-    }, 
+    },
     content: {
-        overflowY: 'hidden', 
+        overflowY: 'hidden',
         padding: '12px 24px'
-    }, 
+    },
     progressBlock: {
         textAlign: 'center'
     }
@@ -66,60 +68,69 @@ export class ScreamDialog extends Component {
 
     render() {
         dayjs.extend(relativeTime);
-        const { 
+        const {
             classes,
             scream: {
-                likeCount, 
-                body, 
-                commentCount, 
-                createdAt, 
-                userHandle, 
-                userImage, 
+                likeCount,
+                body,
+                commentCount,
+                createdAt,
+                userHandle,
+                userImage,
                 screamId
-            }, 
+            },
             ui: {
                 loading
             }
         } = this.props;
         const dialogMarkup = loading ? (
             <div className={classes.progressBlock}>
-                <CircularProgress size={100} color="primary" className={classes.progress}/>
+                <CircularProgress size={100} color="primary" className={classes.progress} />
             </div>
         ) : (
-            <Grid container spacing={16}>
-                <Grid item sm={4}>
-                    <img src={userImage} alt="Profile Image" className={classes.profileImage}/>
-                </Grid>
-                <Grid item sm={1}>
+                <Grid container spacing={16}>
+                    <Grid item sm={4}>
+                        <img src={userImage} alt="Profile Image" className={classes.profileImage} />
+                    </Grid>
+                    <Grid item sm={1}>
 
+                    </Grid>
+                    <Grid item sm={7}>
+                        <Typography
+                            component={Link}
+                            to={`/user/${userHandle}`}
+                            variant="h5"
+                            color="primary">
+                            @{userHandle}
+                        </Typography>
+                        <br />
+                        <Typography
+                            variant="body2"
+                            color="textSecondary">
+                            {dayjs(createdAt).format('DD/MM/YYYY')}
+                        </Typography>
+                        <br />
+                        <Typography
+                            variant="body1">
+                            {body}
+                        </Typography>
+                        <br/>
+                        <LikeButton screamId={screamId}/>
+                        <span>{likeCount} likes</span>
+                        <Tooltip title="Comments">
+                            <IconButton>
+                                <ChatBubbleIcon color="primary" />
+                            </IconButton>
+                        </Tooltip>
+                        <span>{commentCount} comments</span>
+                    </Grid>
                 </Grid>
-                <Grid item sm={7}>
-                    <Typography 
-                        component={Link}
-                        to={`/user/${userHandle}`}
-                        variant="h5"
-                        color="primary">
-                        @{userHandle}
-                    </Typography> 
-                    <br/>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary">
-                        {dayjs(createdAt).format('DD/MM/YYYY')}
-                    </Typography>
-                    <br/>
-                    <Typography
-                        variant="body1">
-                        {body}
-                    </Typography>
-                </Grid>
-            </Grid>
-        )
+            )
         return (
             <Fragment>
                 <Tooltip title="Expand Scream">
                     <IconButton onClick={this.handleOpen}>
-                        <UnfoldMoreIcon color="primary"/>
+                        <UnfoldMoreIcon color="primary" />
                     </IconButton>
                 </Tooltip>
                 <Dialog
@@ -134,6 +145,7 @@ export class ScreamDialog extends Component {
                     </Tooltip>
                     <DialogContent className={classes.content}>
                         {dialogMarkup}
+                        
                     </DialogContent>
                 </Dialog>
             </Fragment>
@@ -151,7 +163,8 @@ ScreamDialog.propTypes = {
 const mapStateToProps = state => {
     return {
         scream: state.data.scream,
-        ui: state.ui
+        ui: state.ui, 
+        data: state.data
     }
 }
 

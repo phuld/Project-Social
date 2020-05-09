@@ -9,12 +9,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Typography, Tooltip, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { likeScream, unlikeScream } from '../redux/actions/dataActions';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteScream from './DeleteScream';
 import ScreamDialog from './ScreamDialog';
+import LikeButton from './LikeButton';
 
 const styles = {
     card: {
@@ -29,21 +29,6 @@ const styles = {
 }
 
 export class Scream extends Component {
-
-    likedScream = () => {
-        if (this.props.user.likes && this.props.user.likes.find(like => like.screamId === this.props.scream.screamId)) {
-            return true;
-        }
-        return false;
-    }
-
-    likeScream = () => {
-        this.props.onLikeScream(this.props.scream.screamId)
-    }
-
-    unlikeScream = () => {
-        this.props.onUnlikeScream(this.props.scream.screamId)
-    }
 
     render() {
         dayjs.extend(relativeTime);
@@ -65,29 +50,7 @@ export class Scream extends Component {
                 }
             }
         } = this.props;
-        const likeButton = !authenticated ? (
-            <Tooltip title="Like">
-                <IconButton>
-                    <Link to="/login">
-                        <FavoriteBorderIcon color="secondary" />
-                    </Link>
-                </IconButton>
-            </Tooltip>
-        ) : (
-                this.likedScream() ? (
-                    <Tooltip title="Unlike">
-                        <IconButton onClick={this.unlikeScream}>
-                            <FavoriteIcon color="secondary" />
-                        </IconButton>
-                    </Tooltip>
-                ) : (
-                        <Tooltip title="Like">
-                            <IconButton onClick={this.likeScream}>
-                                <FavoriteBorderIcon color="secondary" />
-                            </IconButton>
-                        </Tooltip>
-                    )
-            )
+        
         const deleteButton = authenticated ? (
             handle === this.props.scream.userHandle ? (
                 <DeleteScream screamId={screamId} userHandle={handle}/>
@@ -108,7 +71,8 @@ export class Scream extends Component {
                         color='primary'>{userHandle}</Typography>
                     <Typography variant='body2' color="textSecondary">{dayjs(createdAt).fromNow()}</Typography>
                     <Typography variant='body1' >{body}</Typography>
-                    {likeButton}
+                    {/* {likeButton} */}
+                    <LikeButton screamId = {screamId}/>
                     <span>{likeCount} likes</span>
                     <Tooltip title="Comments">
                         <IconButton>
@@ -125,8 +89,7 @@ export class Scream extends Component {
 }
 
 Scream.propTypes = {
-    onLikeScream: PropTypes.func.isRequired,
-    onUnlikeScream: PropTypes.func.isRequired,
+    
     user: PropTypes.object.isRequired,
     scream: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired
@@ -140,8 +103,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLikeScream: (screamId) => dispatch(likeScream(screamId)),
-        onUnlikeScream: (screamId) => dispatch(unlikeScream(screamId))
+        
     }
 }
 

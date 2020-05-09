@@ -32,7 +32,8 @@ const reducer = (state = initialState, action) => {
             let index = state.screams.findIndex(scream => scream.screamId === action.payload.screamId);
             state.screams[index] = action.payload;
             return {
-                ...state 
+                ...state, 
+                scream: action.payload 
             }
         case DELETE_SCREAM:
             const updateScreams = state.screams.filter(scream => scream.screamId !== action.payload);
