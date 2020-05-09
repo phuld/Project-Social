@@ -13,6 +13,12 @@ export class home extends Component {
         this.props.onGetScreams();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.screams.length !== this.props.screams.length) {
+            this.props.onGetScreams();
+        }
+    }
+
 
     render() {
         const {screams, loading} = this.props;

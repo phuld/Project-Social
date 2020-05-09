@@ -1,4 +1,12 @@
-import { GET_SCREAM, LIKE_SCREAM, UNLIKE_SCREAM, LOADING_DATA, DELETE_SCREAM } from '../types';
+import { 
+    GET_SCREAMS,
+    GET_SCREAM, 
+    LIKE_SCREAM, 
+    UNLIKE_SCREAM, 
+    LOADING_DATA, 
+    DELETE_SCREAM, 
+    POST_SCREAM 
+} from '../types';
 
 const initialState = {
     screams: [], 
@@ -31,6 +39,14 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 screams: updateScreams
+            }
+        case POST_SCREAM:
+            return {
+                ...state, 
+                screams: [
+                    ...state.screams, 
+                    action.payload
+                ]
             }
         default:
             return state;

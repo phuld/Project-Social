@@ -7,10 +7,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import { Tooltip, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import PostScream from './PostScream';
 
 const styles = {
     container: {
@@ -29,11 +29,7 @@ export class Navbar extends Component {
             <AppBar position="fixed">
                 {authenticated ? (
                     <Toolbar className={classes.container}>
-                        <Tooltip title="Add a new Scream">
-                            <IconButton>
-                                <AddIcon color="secondary" className={classes.icon}/>
-                            </IconButton>
-                        </Tooltip> 
+                        <PostScream/>
                         <Tooltip title="Home">
                             <IconButton>
                                 <HomeIcon color="action" className={classes.icon}/>
