@@ -1,5 +1,5 @@
 import { 
-        GET_SCREAM, 
+        GET_SCREAMS, 
         LIKE_SCREAM, 
         UNLIKE_SCREAM, 
         LOADING_DATA, 
@@ -7,7 +7,9 @@ import {
         POST_SCREAM, 
         SET_ERROR, 
         LOADING_UI, 
-        CLEAR_ERROR } from '../types';
+        CLEAR_ERROR, 
+        GET_SCREAM,
+        STOP_LOADING_UI} from '../types';
 import axios from 'axios';
 
 //Loading data
@@ -24,14 +26,33 @@ export const getScreams = () => {
         axios.get('/screams')
             .then(response => {
                 dispatch({
-                    type: GET_SCREAM,
+                    type: GET_SCREAMS,
                     payload: response.data
                 })
             })
             .catch(error => {
                 dispatch({
-                    type: GET_SCREAM,
+                    type: GET_SCREAMS,
                     payload: []
+                })
+            })
+    }
+}
+
+//Get One Scream
+export const getOneScream = (screamId) => {
+    return dispatch => {
+        dispatch({
+            type: LOADING_UI
+        })
+        axios.get(`/scream/${screamId}`)
+            .then((response) => {
+                dispatch({
+                    type: GET_SCREAM, 
+                    payload: response.data
+                })
+                dispatch({
+                    type: STOP_LOADING_UI
                 })
             })
     }

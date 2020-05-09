@@ -117,7 +117,6 @@ export class PostScream extends Component {
     }
 
     render() {
-        console.log(this.state);
         const { errors } = this.state;
         const { classes, ui: { loading }, data: {screams} } = this.props;
         return (

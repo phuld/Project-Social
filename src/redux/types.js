@@ -9,9 +9,11 @@ export const SET_ERROR = 'SET_ERROR';
 export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const LOADING_DATA = 'LOADING_DATA';
+export const STOP_LOADING_UI = 'STOP_LOADING_UI';
 
 //Data Reducers
-export const GET_SCREAM = "GET_SCREAM";
+export const GET_SCREAMS = "GET_SCREAMS";
+export const GET_SCREAM = 'GET_SCREAM';
 export const LIKE_SCREAM = 'LIKE_SCREAM';
 export const UNLIKE_SCREAM = 'UNLIKE_SCREAM';
 export const DELETE_SCREAM = 'DELETE_SCREAM';

@@ -14,6 +14,7 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteScream from './DeleteScream';
+import ScreamDialog from './ScreamDialog';
 
 const styles = {
     card: {
@@ -89,7 +90,7 @@ export class Scream extends Component {
             )
         const deleteButton = authenticated ? (
             handle === this.props.scream.userHandle ? (
-                <DeleteScream screamId={screamId}/>
+                <DeleteScream screamId={screamId} userHandle={handle}/>
             ) : null
         ) : null
 
@@ -116,6 +117,7 @@ export class Scream extends Component {
                     </Tooltip>
                     <span>{commentCount} comments</span>
                     {deleteButton}
+                    <ScreamDialog screamId={screamId} />
                 </CardContent>
             </Card>
         )
