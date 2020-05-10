@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { editUserDetails } from '../redux/actions/userActions';
+import { editUserDetails } from '../../redux/actions/userActions';
 
 import { Tooltip, IconButton, Dialog, TextField, Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';

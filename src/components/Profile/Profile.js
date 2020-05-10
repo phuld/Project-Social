@@ -9,7 +9,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import dayjs from 'dayjs';
 import EditIcon from '@material-ui/icons/Edit';
-import { changeImage, logoutUser } from '../redux/actions/userActions';
+import { changeImage, logoutUser } from '../../redux/actions/userActions';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import EditUser from './EditUser';
 const styles = {

@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import { Tooltip, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import PostScream from './PostScream';
+import PostScream from '../Scream/PostScream';
 
 const styles = {
     container: {

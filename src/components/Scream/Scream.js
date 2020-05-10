@@ -14,7 +14,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteScream from './DeleteScream';
 import ScreamDialog from './ScreamDialog';
-import LikeButton from './LikeButton';
+import LikeButton from '../UI/LikeButton';
 
 const styles = {
     card: {

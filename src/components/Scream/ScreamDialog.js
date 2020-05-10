@@ -2,16 +2,16 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import { getOneScream } from '../redux/actions/dataActions';
+import { getOneScream } from '../../redux/actions/dataActions';
 import { Tooltip, IconButton, Dialog, DialogContent, TextField, CircularProgress, Grid, Typography } from '@material-ui/core';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import CloseIcon from '@material-ui/icons/Close';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import LikeButton from './LikeButton';
+import LikeButton from '../UI/LikeButton';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import CommentScream from './CommentScream';
 
 const styles = {
     profileImage: {
@@ -77,7 +77,8 @@ export class ScreamDialog extends Component {
                 createdAt,
                 userHandle,
                 userImage,
-                screamId
+                screamId,
+                comments
             },
             ui: {
                 loading
@@ -114,8 +115,8 @@ export class ScreamDialog extends Component {
                             variant="body1">
                             {body}
                         </Typography>
-                        <br/>
-                        <LikeButton screamId={screamId}/>
+                        <br />
+                        <LikeButton screamId={screamId} />
                         <span>{likeCount} likes</span>
                         <Tooltip title="Comments">
                             <IconButton>
@@ -124,6 +125,8 @@ export class ScreamDialog extends Component {
                         </Tooltip>
                         <span>{commentCount} comments</span>
                     </Grid>
+                    <hr />
+                    <CommentScream comments={comments} />
                 </Grid>
             )
         return (
@@ -145,7 +148,7 @@ export class ScreamDialog extends Component {
                     </Tooltip>
                     <DialogContent className={classes.content}>
                         {dialogMarkup}
-                        
+
                     </DialogContent>
                 </Dialog>
             </Fragment>
@@ -163,7 +166,7 @@ ScreamDialog.propTypes = {
 const mapStateToProps = state => {
     return {
         scream: state.data.scream,
-        ui: state.ui, 
+        ui: state.ui,
         data: state.data
     }
 }

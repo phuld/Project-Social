@@ -10,7 +10,7 @@ import { authCheckState } from './redux/actions/userActions';
 import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
-import Navbar from './components/Navbar';
+import Navbar from './components/Layout/Navbar';
 import AuthRoute from './utils/AuthRoute';
 
 const theme = createMuiTheme(themeFile)
