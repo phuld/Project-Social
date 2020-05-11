@@ -9,8 +9,10 @@ import {
         LOADING_UI, 
         CLEAR_ERROR, 
         GET_SCREAM,
-        STOP_LOADING_UI} from '../types';
+        STOP_LOADING_UI, 
+        SUBMIT_COMMENT} from '../types';
 import axios from 'axios';
+import { DialogActions } from '@material-ui/core';
 
 //Loading data
 export const loadingData = () => {
@@ -136,5 +138,24 @@ export const clearErrors = () => {
         dispatch({
             type: CLEAR_ERROR
         })
+    }
+}
+
+export const submitComment = (screamId, commentData) => {
+    return dispatch => {
+        axios.post(`/scream/${screamId}/comment`, commentData)
+            .then(response => {
+                dispatch({
+                    type: SUBMIT_COMMENT, 
+                    payload: response.data
+                })
+                dispatch(clearErrors())
+            })
+            .catch(error => {
+                dispatch({
+                    type: SET_ERROR, 
+                    payload: error.response.data
+                })
+            })
     }
 }

@@ -28,7 +28,6 @@ export class CommentScream extends Component {
                     const { userHandle, userImage, screamId, body, createdAt } = comment;
                     return (
                         <Fragment>
-                            <hr className={classes.line}/>
                             <Grid item sm={12}>
                                 <Grid container spacing={2}>
                                     <Grid item sm={2}>
@@ -58,6 +57,7 @@ export class CommentScream extends Component {
                                     </Grid>
                                 </Grid>
                             </Grid>
+                            <hr className={classes.line}/>
                         </Fragment>
                     )
                 })}

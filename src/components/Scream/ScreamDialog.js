@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import { getOneScream } from '../../redux/actions/dataActions';
+import { getOneScream, clearErrors } from '../../redux/actions/dataActions';
 import { Tooltip, IconButton, Dialog, DialogContent, TextField, CircularProgress, Grid, Typography } from '@material-ui/core';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import CloseIcon from '@material-ui/icons/Close';
@@ -12,6 +12,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import LikeButton from '../UI/LikeButton';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import CommentScream from './CommentScream';
+import CommentForm from './CommentForm';
 
 const styles = {
     profileImage: {
@@ -37,7 +38,6 @@ const styles = {
         margin: '20px'
     },
     content: {
-        overflowY: 'hidden',
         padding: '12px 24px'
     },
     progressBlock: {
@@ -64,6 +64,7 @@ export class ScreamDialog extends Component {
         this.setState({
             open: false
         })
+        this.props.onClearErrors();
     }
 
     render() {
@@ -126,6 +127,7 @@ export class ScreamDialog extends Component {
                         <span>{commentCount} comments</span>
                     </Grid>
                     <hr />
+                    <CommentForm screamId={screamId}/>
                     <CommentScream comments={comments} />
                 </Grid>
             )
@@ -160,7 +162,9 @@ ScreamDialog.propTypes = {
     screamId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
     scream: PropTypes.object.isRequired,
-    ui: PropTypes.object.isRequired
+    ui: PropTypes.object.isRequired, 
+    onGetOneScream: PropTypes.func.isRequired, 
+    onClearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -173,7 +177,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetOneScream: (screamId) => dispatch(getOneScream(screamId))
+        onGetOneScream: (screamId) => dispatch(getOneScream(screamId)), 
+        onClearErrors: () => dispatch(clearErrors())
     }
 }
 

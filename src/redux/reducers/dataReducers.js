@@ -5,7 +5,8 @@ import {
     LOADING_DATA, 
     DELETE_SCREAM, 
     POST_SCREAM, 
-    GET_SCREAM
+    GET_SCREAM,
+    SUBMIT_COMMENT
 } from '../types';
 
 const initialState = {
@@ -45,14 +46,22 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 screams: [
-                    ...state.screams, 
-                    action.payload
+                    action.payload,
+                    ...state.screams 
                 ]
             }
         case GET_SCREAM:
             return {
                 ...state, 
                 scream: action.payload
+            }
+        case SUBMIT_COMMENT:
+            return {
+                ...state, 
+                scream: {
+                    ...state.scream, 
+                    comments: [action.payload, ...state.scream.comments]
+                }
             }
         default:
             return state;
