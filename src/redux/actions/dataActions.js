@@ -1,16 +1,18 @@
-import { 
-        GET_SCREAMS, 
-        LIKE_SCREAM, 
-        UNLIKE_SCREAM, 
-        LOADING_DATA, 
-        DELETE_SCREAM, 
-        POST_SCREAM, 
-        SET_ERROR, 
-        LOADING_UI, 
-        CLEAR_ERROR, 
-        GET_SCREAM,
-        STOP_LOADING_UI, 
-        SUBMIT_COMMENT} from '../types';
+import {
+    GET_SCREAMS,
+    LIKE_SCREAM,
+    UNLIKE_SCREAM,
+    LOADING_DATA,
+    DELETE_SCREAM,
+    POST_SCREAM,
+    SET_ERROR,
+    LOADING_UI,
+    CLEAR_ERROR,
+    GET_SCREAM,
+    STOP_LOADING_UI,
+    SUBMIT_COMMENT,
+    GET_SCREAMS_BY_USER
+} from '../types';
 import axios from 'axios';
 import { DialogActions } from '@material-ui/core';
 
@@ -50,7 +52,7 @@ export const getOneScream = (screamId) => {
         axios.get(`/scream/${screamId}`)
             .then((response) => {
                 dispatch({
-                    type: GET_SCREAM, 
+                    type: GET_SCREAM,
                     payload: response.data
                 })
                 dispatch({
@@ -98,7 +100,7 @@ export const deleteScream = (screamId) => {
         axios.delete(`/scream/${screamId}`)
             .then((response) => {
                 dispatch({
-                    type: DELETE_SCREAM, 
+                    type: DELETE_SCREAM,
                     payload: screamId
                 })
             })
@@ -117,7 +119,7 @@ export const postScream = (newScream) => {
         axios.post('/scream', newScream)
             .then(response => {
                 dispatch({
-                    type: POST_SCREAM, 
+                    type: POST_SCREAM,
                     payload: response.data
                 })
                 dispatch({
@@ -126,7 +128,7 @@ export const postScream = (newScream) => {
             })
             .catch(error => {
                 dispatch({
-                    type: SET_ERROR, 
+                    type: SET_ERROR,
                     payload: error.response.data
                 })
             })
@@ -146,15 +148,36 @@ export const submitComment = (screamId, commentData) => {
         axios.post(`/scream/${screamId}/comment`, commentData)
             .then(response => {
                 dispatch({
-                    type: SUBMIT_COMMENT, 
+                    type: SUBMIT_COMMENT,
                     payload: response.data
                 })
                 dispatch(clearErrors())
             })
             .catch(error => {
                 dispatch({
-                    type: SET_ERROR, 
+                    type: SET_ERROR,
                     payload: error.response.data
+                })
+            })
+    }
+}
+
+export const getScreamsByUser = (userHandle) => {
+    return dispatch => {
+        dispatch({
+            type: LOADING_DATA
+        })
+        axios.get(`/user/${userHandle}`)
+            .then(response => {
+                dispatch({
+                    type: GET_SCREAMS, 
+                    payload: response.data.screams
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: SET_ERROR, 
+                    payload: []
                 })
             })
     }

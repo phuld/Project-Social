@@ -137,7 +137,7 @@ export class EditUser extends Component {
 
 EditUser.propTypes = {
     classes: PropTypes.object.isRequired,
-    onEditUserDetail: PropTypes.object.isRequired
+    onEditUserDetail: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {

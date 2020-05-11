@@ -81,7 +81,7 @@ export class Scream extends Component {
                     </Tooltip>
                     <span>{commentCount} comments</span>
                     {deleteButton}
-                    <ScreamDialog screamId={screamId} />
+                    <ScreamDialog screamId={screamId} openDialog={this.props.openDialog} userHandle={userHandle}/>
                 </CardContent>
             </Card>
         )

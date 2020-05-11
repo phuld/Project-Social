@@ -12,6 +12,7 @@ import login from './pages/login';
 import signup from './pages/signup';
 import Navbar from './components/Layout/Navbar';
 import AuthRoute from './utils/AuthRoute';
+import user from './pages/user';
 
 const theme = createMuiTheme(themeFile)
 
@@ -30,6 +31,8 @@ class App extends Component {
                             <Route exact path="/" component={home} />
                             <AuthRoute exact path="/login" component={login} authenticated={authenticated} />
                             <AuthRoute exact path="/signup" component={signup} authenticated={authenticated} />
+                            <Route exact path="/user/:userHandle" component={user}/>
+                            <Route exact path="/user/:userHandle/scream/:screamId" component={user}/>
                         </Switch>
                     </div>
                 </BrowserRouter>

@@ -138,3 +138,7 @@ export const editUserDetails = (userDetail) => {
             })
     }
 }
+
+export const markNotifications = () => {
+    
+}

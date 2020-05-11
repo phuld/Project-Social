@@ -31,7 +31,7 @@ export class Navbar extends Component {
                     <Toolbar className={classes.container}>
                         <PostScream/>
                         <Tooltip title="Home">
-                            <IconButton>
+                            <IconButton component={Link} to="/">
                                 <HomeIcon color="action" className={classes.icon}/>
                             </IconButton>
                         </Tooltip> 

@@ -49,18 +49,38 @@ export class ScreamDialog extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: false
+            open: false, 
+            oldPath: '', 
+            newPath: ''
         }
     }
 
+    
+    componentDidMount() {
+        if(this.props.openDialog) {
+            this.handleOpen()
+        }
+    }
+    
+
     handleOpen = () => {
+        let oldPath= window.location.pathname;
+        const {screamId, userHandle} = this.props;
+        const newPath = `/user/${userHandle}/scream/${screamId}`;
+
+        if(oldPath === newPath) oldPath=`/user/${userHandle}`;
+        window.history.pushState(null, null, newPath);
+        
         this.setState({
-            open: true
+            open: true, 
+            oldPath, 
+            newPath
         })
         this.props.onGetOneScream(this.props.screamId)
     }
 
     handleClose = () => {
+        window.history.pushState(null, null, this.state.oldPath)
         this.setState({
             open: false
         })
@@ -90,7 +110,7 @@ export class ScreamDialog extends Component {
                 <CircularProgress size={100} color="primary" className={classes.progress} />
             </div>
         ) : (
-                <Grid container spacing={16}>
+                <Grid container spacing={2}>
                     <Grid item sm={4}>
                         <img src={userImage} alt="Profile Image" className={classes.profileImage} />
                     </Grid>
@@ -160,7 +180,6 @@ export class ScreamDialog extends Component {
 
 ScreamDialog.propTypes = {
     screamId: PropTypes.string.isRequired,
-    userHandle: PropTypes.string.isRequired,
     scream: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired, 
     onGetOneScream: PropTypes.func.isRequired, 
