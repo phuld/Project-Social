@@ -11,8 +11,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const styles = {
     deleteButton: {
         position: 'absolute', 
-        top: '5%', 
-        right: '5%'
+        top: 0, 
+        right: 0
     }
 }
 

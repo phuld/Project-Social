@@ -32,12 +32,6 @@ export class CommentForm extends Component {
             }
         }
     }
-    
-    componentDidUpdate(prevProps, prevState) {
-        console.log(prevProps, this.props);
-        console.log(prevState.body, this.state.body);
-        
-    }
 
     handleChange = (event) => {
         this.setState({

@@ -10,6 +10,8 @@ export const LOADING_UI = 'LOADING_UI';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const LOADING_DATA = 'LOADING_DATA';
 export const STOP_LOADING_UI = 'STOP_LOADING_UI';
+export const SET_MESSAGE = 'SET_MESSAGE';
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
 
 //Data Reducers
 export const GET_SCREAMS = "GET_SCREAMS";

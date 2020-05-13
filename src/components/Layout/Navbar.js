@@ -9,7 +9,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { Tooltip, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import PostScream from '../Scream/PostScream';
 import Notifications from './Notifications';
 

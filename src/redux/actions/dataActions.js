@@ -10,9 +10,17 @@ import {
     CLEAR_ERROR,
     GET_SCREAM,
     STOP_LOADING_UI,
-    SUBMIT_COMMENT
+    SUBMIT_COMMENT, 
+    SET_MESSAGE, 
+    CLEAR_MESSAGE
 } from '../types';
 import axios from 'axios';
+
+export const clearMessage = () => {
+    return {
+        type: CLEAR_MESSAGE 
+    }
+}
 
 //Loading data
 export const loadingData = () => {
@@ -69,6 +77,10 @@ export const likeScream = (screamId) => {
                     type: LIKE_SCREAM,
                     payload: response.data
                 })
+                dispatch({
+                    type: SET_MESSAGE, 
+                    payload: 'Scream liked Successfully'
+                })
             })
             .catch(error => {
                 console.log(error);
@@ -85,6 +97,10 @@ export const unlikeScream = (screamId) => {
                     type: UNLIKE_SCREAM,
                     payload: response.data
                 })
+                dispatch({
+                    type: SET_MESSAGE, 
+                    payload: 'Unlike scream successfully'
+                })
             })
             .catch(error => {
                 console.log(error);
@@ -100,6 +116,10 @@ export const deleteScream = (screamId) => {
                 dispatch({
                     type: DELETE_SCREAM,
                     payload: screamId
+                })
+                dispatch({
+                    type: SET_MESSAGE, 
+                    payload: "Scream deleted successfully"
                 })
             })
             .catch(error => {

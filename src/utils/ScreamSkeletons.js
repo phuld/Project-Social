@@ -10,8 +10,8 @@ const styles = {
         display: 'flex'
     },
     cardMedia: {
-        width: '150px',
-        height: '150px'
+        width: '170px',
+        height: '170px'
     },
     cardContent: {
         padding: 0
@@ -44,7 +44,7 @@ const ScreamSkeletons = (props) => {
             <Card key={index} className={classes.card}>
                 <CardMedia className={classes.cardMedia} image={noImg}>
                 </CardMedia>
-                <CardContent classesName={classes.cardContent}>
+                <CardContent className={classes.cardContent}>
                     <div className={classes.userHandle}></div>
                     <div className={classes.date}></div>
                     <div className={classes.body}></div>

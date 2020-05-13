@@ -6,9 +6,9 @@ import { postScream, clearErrors } from '../../redux/actions/dataActions';
 
 import { Tooltip, IconButton, Dialog, DialogContent, TextField, Button, CircularProgress } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 const styles = {
     icon: {
@@ -23,8 +23,7 @@ const styles = {
         color: "black"
     },
     dialog: {
-        position: 'relative',
-        textAlign: 'center'
+        position: 'relative'
     },
     submitButton: {
         margin: '30px 0 15px 0',
@@ -45,22 +44,6 @@ export class PostScream extends Component {
             errors: {}
         }
     }
-
-    // componentWillReceiveProps(nextProps) {
-    //     if(this.state.errors && nextProps.ui.errors) {
-    //         this.setState({
-    //             errors: nextProps.ui.errors
-    //         })
-    //     }
-    //     if(!nextProps.ui.errors && !nextProps.ui.loading) {
-    //         this.setState({
-    //             body: '', 
-    //             open: false,
-    //             errors: {}
-    //         })
-    //         this.handleClose()
-    //     }
-    // }
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.ui.errors) {
             return {
@@ -76,19 +59,18 @@ export class PostScream extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // if(prevState.body && !)
-        if(prevProps.data.screams !== this.props.data.screams) {
+        if (prevProps.data.screams !== this.props.data.screams) {
             this.setState({
                 body: ''
             });
             this.handleClose();
         }
     }
-        
+
     handleOpen = () => {
         this.setState({
-            open: true, 
-            errors: {}, 
+            open: true,
+            errors: {},
             body: ''
         })
     }
@@ -118,7 +100,7 @@ export class PostScream extends Component {
 
     render() {
         const { errors } = this.state;
-        const { classes, ui: { loading }, data: {screams} } = this.props;
+        const { classes, ui: { loading } } = this.props;
         return (
             <Fragment>
                 <Tooltip title="Add a new Scream">
@@ -140,6 +122,9 @@ export class PostScream extends Component {
                         Post a new scream
                     </DialogTitle>
                     <DialogContent>
+                        <DialogContentText>
+                            Please fill out the form below  
+                        </DialogContentText>
                         <form onSubmit={this.handleSubmit}>
                             <TextField
                                 id="body"
@@ -172,22 +157,22 @@ export class PostScream extends Component {
 
 PostScream.propTypes = {
     classes: PropTypes.object.isRequired,
-    ui: PropTypes.object.isRequired, 
-    data: PropTypes.object.isRequired, 
-    onPostScream: PropTypes.func.isRequired, 
+    ui: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
+    onPostScream: PropTypes.func.isRequired,
     onClearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
     return {
-        ui: state.ui, 
+        ui: state.ui,
         data: state.data
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onPostScream: (newScream) => dispatch(postScream(newScream)), 
+        onPostScream: (newScream) => dispatch(postScream(newScream)),
         onClearErrors: () => dispatch(clearErrors())
     }
 }

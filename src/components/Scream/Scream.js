@@ -10,8 +10,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Typography, Tooltip, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteScream from './DeleteScream';
 import ScreamDialog from './ScreamDialog';
 import LikeButton from '../UI/LikeButton';
@@ -19,12 +17,30 @@ import LikeButton from '../UI/LikeButton';
 const styles = {
     card: {
         display: 'flex',
-        marginBottom: 20, 
-        position:'relative'
+        marginBottom: 20,
+        position: 'relative'
     },
     image: {
-        minWidth: 150,
+        minWidth: 170,
+        height: 170,
         backgroundSize: 'cover'
+    },
+    cardContent: {
+
+    }, 
+    actionButton: {
+        position: 'absolute', 
+        bottom: 0
+    }, 
+    date: {
+        marginBottom: '10px'
+    }, 
+    body: {
+        overflow: 'hidden', 
+        textOverflow: 'ellipsis', 
+        WebkitLineClamp: 2,
+        display: '-webkit-box', 
+        WebkitBoxOrient: 'vertical'
     }
 }
 
@@ -44,16 +60,16 @@ export class Scream extends Component {
                 screamId
             },
             user: {
-                authenticated, 
+                authenticated,
                 credentials: {
                     handle
                 }
             }
         } = this.props;
-        
+
         const deleteButton = authenticated ? (
             handle === this.props.scream.userHandle ? (
-                <DeleteScream screamId={screamId} userHandle={handle}/>
+                <DeleteScream screamId={screamId} userHandle={handle} />
             ) : null
         ) : null
 
@@ -63,25 +79,27 @@ export class Scream extends Component {
                     image={userImage}
                     title="Profile image"
                     className={classes.image} />
-                <CardContent>
+                <CardContent className={classes.cardContent}>
                     <Typography
-                        variant='h5'
+                        variant='h6'
                         component={Link}
                         to={`/user/${userHandle}`}
                         color='primary'>{userHandle}</Typography>
-                    <Typography variant='body2' color="textSecondary">{dayjs(createdAt).fromNow()}</Typography>
-                    <Typography variant='body1' >{body}</Typography>
+                    <Typography variant='body2' color="textSecondary" className={classes.date}>{dayjs(createdAt).fromNow()}</Typography>
+                    <Typography variant='body1' className={classes.body}>{body}</Typography>
                     {/* {likeButton} */}
-                    <LikeButton screamId = {screamId}/>
-                    <span>{likeCount} likes</span>
-                    <Tooltip title="Comments">
-                        <IconButton>
-                            <ChatBubbleIcon color="primary" />
-                        </IconButton>
-                    </Tooltip>
-                    <span>{commentCount} comments</span>
+                    <div className={classes.actionButton}>
+                        <LikeButton screamId={screamId} />
+                        <span>{likeCount} likes</span>
+                        <Tooltip title="Comments">
+                            <IconButton>
+                                <ChatBubbleIcon color="primary" />
+                            </IconButton>
+                        </Tooltip>
+                        <span>{commentCount} comments</span>
+                        <ScreamDialog screamId={screamId} openDialog={this.props.openDialog} userHandle={userHandle} />
+                    </div>
                     {deleteButton}
-                    <ScreamDialog screamId={screamId} openDialog={this.props.openDialog} userHandle={userHandle}/>
                 </CardContent>
             </Card>
         )
@@ -89,7 +107,7 @@ export class Scream extends Component {
 }
 
 Scream.propTypes = {
-    
+
     user: PropTypes.object.isRequired,
     scream: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired
@@ -103,7 +121,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        
+
     }
 }
 

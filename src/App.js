@@ -13,6 +13,7 @@ import signup from './pages/signup';
 import Navbar from './components/Layout/Navbar';
 import AuthRoute from './utils/AuthRoute';
 import user from './pages/user';
+import Message from './components/UI/Message';
 
 const theme = createMuiTheme(themeFile)
 
@@ -26,6 +27,7 @@ class App extends Component {
             <MuiThemeProvider theme={theme}>
                 <BrowserRouter>
                     <Navbar />
+                    <Message/>
                     <div className='container'>
                         <Switch>
                             <Route exact path="/" component={home} />
@@ -41,6 +43,11 @@ class App extends Component {
     }
 }
 
+App.propTypes = {
+    user: PropTypes.object.isRequired,
+    onAuthCheckState: PropTypes.func.isRequired
+}
+
 const mapStateToProps = state => {
     return {
         user: state.user
@@ -51,11 +58,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuthCheckState: () => dispatch(authCheckState())
     }
-}
-
-App.propTypes = {
-    user: PropTypes.object.isRequired,
-    onAuthCheckState: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

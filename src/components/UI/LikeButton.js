@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Tooltip, IconButton } from '@material-ui/core';
@@ -25,7 +25,7 @@ export class LikeButton extends Component {
     }
 
     render() {
-        const { 
+        const {
             user: {
                 authenticated
             }
@@ -38,21 +38,21 @@ export class LikeButton extends Component {
                     </Link>
                 </IconButton>
             </Tooltip>
-        ) : (
-                this.likedScream() ? (
-                    <Tooltip title="Unlike">
-                        <IconButton onClick={this.unlikeScream}>
-                            <FavoriteIcon color="secondary" />
+        ) :
+            this.likedScream() === true ? (
+                <Tooltip title="Unlike">
+                    <IconButton onClick={this.unlikeScream}>
+                        <FavoriteIcon color="secondary" />
+                    </IconButton>
+                </Tooltip>
+            ) : (
+                    <Tooltip title="Like">
+                        <IconButton onClick={this.likeScream}>
+                            <FavoriteBorderIcon color="secondary" />
                         </IconButton>
                     </Tooltip>
-                ) : (
-                        <Tooltip title="Like">
-                            <IconButton onClick={this.likeScream}>
-                                <FavoriteBorderIcon color="secondary" />
-                            </IconButton>
-                        </Tooltip>
-                    )
-            )
+                )
+
         return likeButton;
     }
 }

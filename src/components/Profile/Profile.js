@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
@@ -18,22 +18,31 @@ const styles = {
         textAlign: 'center',
         width: '100%',
         padding: 20,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        lineHeight: '1.5'
     },
     profileImage: {
-        width: '50%',
+        width: '170px',
+        height: '170px',
         borderRadius: '50%'
     },
     blockCenter: {
+        // display: 'flex',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        textAlign: 'initial',
+        marginBottom: '10px',
+        display: 'flex'
+    },
+    blockIcon: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-
+        justifyContent: 'space-around'
     },
     blockAround: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     },
     text: {
         padding: '20px 0'
@@ -52,6 +61,12 @@ const styles = {
     },
     right: {
         float: 'right'
+    },
+    bio: {
+        margin: '20px 0'
+    },
+    icon: {
+        marginRight: '5px'
     }
 }
 
@@ -77,7 +92,7 @@ class Profile extends Component {
         const {
             classes,
             user: {
-                credentials: { email, imageUrl, createdAt, handle, bio, website, location },
+                credentials: { imageUrl, createdAt, handle, bio, website, location },
                 loading,
                 authenticated
             }
@@ -86,7 +101,7 @@ class Profile extends Component {
             <Paper>
                 <div className={classes.profile}>
                     <div className={classes.blockImage}>
-                        <img src={imageUrl} alt="Profile Image" className={classes.profileImage} />
+                        <img src={imageUrl} alt="" className={classes.profileImage} />
                         <input
                             type="file"
                             id="imageInput"
@@ -100,21 +115,21 @@ class Profile extends Component {
                     </div>
                     <Typography color="primary" component={Link} to={`/user/${handle}`} variant="h5">@{handle}</Typography>
                     <br />
-                    {bio && <Typography variant="body1">{bio}</Typography>}
+                    {bio && <Typography variant="body1" className={classes.bio}>{bio}</Typography>}
                     {location && (
                         <div className={classes.blockCenter}>
-                            <LocationOnIcon color="primary" /><span>{location}</span>
+                            <LocationOnIcon color="primary" className={classes.icon} /><span>{location}</span>
                             <br />
                         </div>
                     )}
                     {website && (
                         <div className={classes.blockCenter}>
-                            <LinkIcon color="primary" />
-                            <span><a href={website} target="_blank">{''}{website}</a> </span>
+                            <LinkIcon color="primary" className={classes.icon} />
+                            <span><a href={website} target="_blank" rel="noopener noreferrer">{''}{website}</a> </span>
                         </div>
                     )}
                     <div className={classes.blockCenter}>
-                        <DateRangeIcon color="primary" />
+                        <DateRangeIcon color="primary" className={classes.icon} />
                         <span>{' '} Joined in {dayjs(createdAt).format('DD/MM/YYYY')}</span>
                     </div>
                     <div className={classes.blockAround}>
@@ -130,7 +145,7 @@ class Profile extends Component {
         ) : (
                 <Paper className={classes.profile}>
                     <Typography variant="body2" className={classes.text}>No profile found, please login again</Typography>
-                    <div className={classes.blockAround}>
+                    <div className={classes.blockIcon}>
                         <Button variant="contained" color="primary" component={Link} to="/login">
                             Login
                         </Button>
@@ -140,7 +155,7 @@ class Profile extends Component {
                     </div>
                 </Paper>
             )) : (
-                <ProfileSkeletons/>
+                <ProfileSkeletons />
             )
         return profile;
     }

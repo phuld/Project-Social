@@ -25,7 +25,7 @@ export class CommentScream extends Component {
         return (
             <Grid container>
                 {comments.map(comment => {
-                    const { userHandle, userImage, screamId, body, createdAt } = comment;
+                    const { userHandle, userImage, body, createdAt } = comment;
                     return (
                         <Fragment>
                             <Grid item sm={12}>

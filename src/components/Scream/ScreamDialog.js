@@ -105,7 +105,7 @@ export class ScreamDialog extends Component {
                 loading
             }
         } = this.props;
-        const dialogMarkup = loading ? (
+        const dialogMarkup = loading === true ? (
             <div className={classes.progressBlock}>
                 <CircularProgress size={100} color="primary" className={classes.progress} />
             </div>
