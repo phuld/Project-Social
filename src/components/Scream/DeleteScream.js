@@ -42,7 +42,7 @@ export class DeleteScream extends Component {
     }
 
     render() {
-        const { screamId, classes } = this.props;
+        const { classes } = this.props;
         return (
             <Fragment>
                 <Tooltip title="Delete">

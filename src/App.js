@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import themeFile from './utils/theme';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

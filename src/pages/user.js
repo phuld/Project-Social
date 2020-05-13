@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import StaticProfile from '../components/Profile/StaticProfile';
 import Scream from '../components/Scream/Scream';
+import ScreamSkeletons from '../utils/ScreamSkeletons';
 
 export class user extends Component {
 
@@ -43,7 +44,7 @@ export class user extends Component {
         const { screams, loading } = this.props.data;
         const {screamIdParam} = this.state;
         const screamMarkup = loading ? (
-            <p>Loading data ...</p>
+            <ScreamSkeletons/>
         ): screams.length === 0 ? (
             <p>No scream from this user</p>
         ) :  !screamIdParam ? (

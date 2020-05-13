@@ -53,11 +53,9 @@ export class CommentForm extends Component {
     render() {
         const {
             classes,
-            screamId,
-            ui,
             authenticated
         } = this.props;
-        const { body, errors } = this.state;
+        const {  errors } = this.state;
         const commentFormMarkup = authenticated ? (
             <Grid item sm={12} className={classes.form}>
                 <form onSubmit={this.handleSubmit} >

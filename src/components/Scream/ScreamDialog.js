@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import { getOneScream, clearErrors } from '../../redux/actions/dataActions';
-import { Tooltip, IconButton, Dialog, DialogContent, TextField, CircularProgress, Grid, Typography } from '@material-ui/core';
+import { Tooltip, IconButton, Dialog, DialogContent, CircularProgress, Grid, Typography } from '@material-ui/core';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import CloseIcon from '@material-ui/icons/Close';
 import { Link } from 'react-router-dom';
@@ -112,7 +112,7 @@ export class ScreamDialog extends Component {
         ) : (
                 <Grid container spacing={2}>
                     <Grid item sm={4}>
-                        <img src={userImage} alt="Profile Image" className={classes.profileImage} />
+                        <img src={userImage} alt="" className={classes.profileImage} />
                     </Grid>
                     <Grid item sm={1}>
 

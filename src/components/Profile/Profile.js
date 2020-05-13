@@ -12,6 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { changeImage, logoutUser } from '../../redux/actions/userActions';
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
 import EditUser from './EditUser';
+import ProfileSkeletons from '../../utils/ProfileSkeletons';
 const styles = {
     profile: {
         textAlign: 'center',
@@ -138,7 +139,9 @@ class Profile extends Component {
                         </Button>
                     </div>
                 </Paper>
-            )) : (<p>Loadng ...</p >)
+            )) : (
+                <ProfileSkeletons/>
+            )
         return profile;
     }
 }

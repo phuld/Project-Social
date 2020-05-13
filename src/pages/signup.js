@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { logoutUser, signupUser } from '../redux/actions/userActions';
+import { signupUser, clearErrors } from '../redux/actions/userActions';
 
 import PropTypes from 'prop-types';
-import IconImage from '../assets/images/icon.jpg';
+import IconImage from '../assets/images/logo.jpeg';
 import Grid from '@material-ui/core/Grid';
 import { Typography, TextField, Button, CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -27,6 +26,12 @@ class signup extends Component {
         }
     }
 
+    
+    componentDidMount() {
+        this.props.onClearErrors();
+    }
+    
+
     handleSubmit = (event) => {
         event.preventDefault();
         const newUserData = {
@@ -45,13 +50,13 @@ class signup extends Component {
     }
 
     render() {
-        const { classes, user, ui: {loading, errors} } = this.props;
+        const { classes, ui: {loading, errors} } = this.props;
         return (
             <Grid container className={classes.form}>
                 <Grid item sm />
                 <Grid item sm>
                     <img src={IconImage} alt="Logo" className={classes.image} />
-                    <Typography variant="h2" className={classes.title}>Signup</Typography>
+                    <Typography variant="h5" className={classes.title}>Signup</Typography>
                     <form noValidate onSubmit={this.handleSubmit} method="POST">
                         <TextField id="email" name="email" type="email" label="Email" className={classes.textField}
                             value={this.state.email} onChange={this.handleChange} fullWidth
@@ -88,7 +93,8 @@ signup.propTypes = {
     classes: PropTypes.object.isRequired, 
     user: PropTypes.object.isRequired, 
     ui: PropTypes.object.isRequired, 
-    onSignup: PropTypes.func.isRequired
+    onSignup: PropTypes.func.isRequired, 
+    onClearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToprops = state => {
@@ -100,7 +106,8 @@ const mapStateToprops = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignup: (userData, history) => dispatch(signupUser(userData, history))
+        onSignup: (userData, history) => dispatch(signupUser(userData, history)), 
+        onClearErrors: () => dispatch(clearErrors())
     }
 }
 

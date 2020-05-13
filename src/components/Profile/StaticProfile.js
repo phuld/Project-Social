@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import {Paper, Tooltip, Typography } from '@material-ui/core'
+import {Paper, Typography } from '@material-ui/core'
 import {Link} from 'react-router-dom';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
@@ -67,7 +67,7 @@ export class StaticProfile extends Component {
             <Paper>
                 <div className={classes.profile}>
                     <div className={classes.blockImage}>
-                        <img src={imageUrl} alt="Profile Image" className={classes.profileImage} />
+                        <img src={imageUrl} alt="" className={classes.profileImage} />
                         <input
                             type="file"
                             id="imageInput"
@@ -86,7 +86,7 @@ export class StaticProfile extends Component {
                     {website && (
                         <div className={classes.blockCenter}>
                             <LinkIcon color="primary" />
-                            <span><a href={website} target="_blank">{''}{website}</a> </span>
+                            <span><a href={website} target="_blank" rel="noopener noreferrer">{''}{website}</a> </span>
                         </div>
                     )}
                     <div className={classes.blockCenter}>

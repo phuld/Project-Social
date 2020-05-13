@@ -1,10 +1,25 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import { SET_ERROR, LOADING_UI, CLEAR_ERROR, SET_USER, SET_UNAUTHENTICATED, SET_AUTHENTICATED, LOADING_USER } from '../types';
+import { 
+    SET_ERROR, 
+    LOADING_UI, 
+    CLEAR_ERROR, 
+    SET_USER, 
+    SET_UNAUTHENTICATED, 
+    SET_AUTHENTICATED, 
+    LOADING_USER, 
+    MARK_NOTIFICATIONS_READ
+} from '../types';
 
 export const loadingUI = () => {
     return {
         type: LOADING_UI
+    }
+}
+
+export const clearErrors = () => {
+    return {
+        type: CLEAR_ERROR
     }
 }
 
@@ -25,10 +40,7 @@ export const getUserData = () => {
                 })
             })
             .catch(error => {
-                dispatch({
-                    type: SET_ERROR,
-                    payload: error.response.data
-                })
+                console.log(error);
             })
     }
 }
@@ -100,7 +112,7 @@ export const authCheckState = () => {
         const authToken = localStorage.getItem('authToken');
         if (authToken) {
             const decodedToken = jwtDecode(authToken);
-            if (decodedToken.exp * 1000 < Date.now()) {
+            if (decodedToken.exp * 1000 < Date.now() || !(decodedToken.exp)) {
                 dispatch(logoutUser());
                 window.location.href = "/login";
             } else {
@@ -139,6 +151,16 @@ export const editUserDetails = (userDetail) => {
     }
 }
 
-export const markNotifications = () => {
-    
+export const markNotificationsRead = (notificationIds) => {
+    return dispatch => {
+        axios.post('/notifications', notificationIds)
+            .then(response => {
+                dispatch({
+                    type: MARK_NOTIFICATIONS_READ
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 }

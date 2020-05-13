@@ -10,11 +10,9 @@ import {
     CLEAR_ERROR,
     GET_SCREAM,
     STOP_LOADING_UI,
-    SUBMIT_COMMENT,
-    GET_SCREAMS_BY_USER
+    SUBMIT_COMMENT
 } from '../types';
 import axios from 'axios';
-import { DialogActions } from '@material-ui/core';
 
 //Loading data
 export const loadingData = () => {

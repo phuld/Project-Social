@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
 import Scream from '../components/Scream/Scream';
 import Profile from '../components/Profile/Profile';
 import { connect } from 'react-redux';
 import { getScreams } from '../redux/actions/dataActions';
 import PropTypes from 'prop-types';
+import ScreamSkeletons from '../utils/ScreamSkeletons';
 
 export class home extends Component {
 
@@ -18,7 +18,7 @@ export class home extends Component {
         const displayScream = !loading ?
             (screams.map(scream => (
                 <Scream scream={scream} key={scream.screamId} />
-            ))) : <p>Loading</p>;
+            ))) : <ScreamSkeletons/>;
         return (
             <div>
                 <Grid container spacing={2}>

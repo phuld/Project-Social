@@ -11,6 +11,7 @@ import { Tooltip, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PostScream from '../Scream/PostScream';
+import Notifications from './Notifications';
 
 const styles = {
     container: {
@@ -35,11 +36,7 @@ export class Navbar extends Component {
                                 <HomeIcon color="action" className={classes.icon}/>
                             </IconButton>
                         </Tooltip> 
-                        <Tooltip title="Notifications">
-                            <IconButton>
-                                <NotificationsIcon color="primary" className={classes.icon}/>
-                            </IconButton>
-                        </Tooltip>                        
+                        <Notifications/>                        
                     </Toolbar>
                 ) : (
                         <Toolbar className={classes.container}>

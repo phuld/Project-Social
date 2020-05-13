@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { Typography, Tooltip, IconButton } from '@material-ui/core';
+import { Tooltip, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { likeScream, unlikeScream } from '../../redux/actions/dataActions';

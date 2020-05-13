@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
-import { loginUser } from '../redux/actions/userActions';
+import { loginUser, clearErrors } from '../redux/actions/userActions';
 
 import PropTypes from 'prop-types';
-import IconImage from '../assets/images/icon.jpg';
+import IconImage from '../assets/images/logo.jpeg';
 import Grid from '@material-ui/core/Grid';
 import { Typography, TextField, Button, CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -23,6 +23,12 @@ class login extends Component {
         }
     }
 
+    
+    componentDidMount() {
+        this.props.onClearErrors()
+    }
+    
+
     handleSubmit = (event) => {
         event.preventDefault();
         const userData = {
@@ -39,13 +45,14 @@ class login extends Component {
     }
 
     render() {
-        const { classes, user, ui: { loading, errors } } = this.props;
+        const { classes, ui: { loading, errors } } = this.props;
         return (
-            <Grid container className={classes.form}>
+            <Grid container className={classes.form} spacing={3}>
                 <Grid item sm />
                 <Grid item sm>
                     <img src={IconImage} alt="Logo" className={classes.image} />
-                    <Typography variant="h2" className={classes.title}>Login</Typography>
+                    <Typography variant="h5" className={classes.title}>Login</Typography>
+                    <Typography variant="body2" className={classes.title}>Get started with our service</Typography>
                     <form noValidate onSubmit={this.handleSubmit} method="POST">
                         <TextField id="email" name="email" type="email" label="Email" className={classes.textField}
                             value={this.state.email} onChange={this.handleChange} fullWidth
@@ -74,7 +81,8 @@ login.propTypes = {
     classes: PropTypes.object.isRequired,
     loginUser: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    ui: PropTypes.object.isRequired
+    ui: PropTypes.object.isRequired, 
+    onClearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -86,7 +94,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginUser: (userData, history) => dispatch(loginUser(userData, history))
+        loginUser: (userData, history) => dispatch(loginUser(userData, history)), 
+        onClearErrors: () => dispatch(clearErrors())
     }
 }
 
