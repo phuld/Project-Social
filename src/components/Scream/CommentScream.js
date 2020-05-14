@@ -9,7 +9,9 @@ import dayjs from 'dayjs';
 const styles = {
     commentImage: {
         width: '100%', 
-        borderRadius: '50%'
+        borderRadius: '50%', 
+        maxHeight: '100px', 
+        minHeight: '70px'
     }, 
     line: {
         width: '100%',
@@ -24,11 +26,11 @@ export class CommentScream extends Component {
         const { comments, classes } = this.props;
         return (
             <Grid container>
-                {comments.map(comment => {
+                {comments.map((comment, index) => {
                     const { userHandle, userImage, body, createdAt } = comment;
                     return (
-                        <Fragment>
-                            <Grid item sm={12}>
+                        <Fragment key={index}>
+                            <Grid item sm={12} key={index}>
                                 <Grid container spacing={2}>
                                     <Grid item sm={2}>
                                         <img src={userImage} alt="comment" className={classes.commentImage}/>
@@ -48,7 +50,6 @@ export class CommentScream extends Component {
                                                 color="textSecondary">
                                                 {dayjs(createdAt).format("DD/MM/YYYY")}
                                             </Typography>
-                                            <br/>
                                             <Typography
                                                 variant="body1">
                                                 {body}
@@ -57,7 +58,7 @@ export class CommentScream extends Component {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <hr className={classes.line}/>
+                            {index !== comments.length -1 && (<hr className={classes.line}/>)}
                         </Fragment>
                     )
                 })}

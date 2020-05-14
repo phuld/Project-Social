@@ -13,22 +13,31 @@ const styles = {
         textAlign: 'center',
         width: '100%',
         padding: 20,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        lineHeight: '1.5'
     },
     profileImage: {
-        width: '50%',
+        width: '170px',
+        height: '170px',
         borderRadius: '50%'
     },
     blockCenter: {
+        // display: 'flex',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        textAlign: 'initial',
+        marginBottom: '10px',
+        display: 'flex'
+    },
+    blockIcon: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-
+        justifyContent: 'space-around'
     },
     blockAround: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     },
     text: {
         padding: '20px 0'
@@ -47,6 +56,12 @@ const styles = {
     },
     right: {
         float: 'right'
+    },
+    bio: {
+        margin: '20px 0'
+    },
+    icon: {
+        marginRight: '5px'
     }
 }
 
@@ -76,7 +91,7 @@ export class StaticProfile extends Component {
                     </div>
                     <Typography color="primary" component={Link} to={`/user/${handle}`} variant="h5">@{handle}</Typography>
                     <br />
-                    {bio && <Typography variant="body1">{bio}</Typography>}
+                    {bio && <Typography variant="body1" className={classes.bio}>{bio}</Typography>}
                     {location && (
                         <div className={classes.blockCenter}>
                             <LocationOnIcon color="primary" /><span>{location}</span>

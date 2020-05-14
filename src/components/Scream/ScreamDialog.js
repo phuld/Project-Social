@@ -16,10 +16,9 @@ import CommentForm from './CommentForm';
 
 const styles = {
     profileImage: {
-        maxWidth: '200px',
-        height: '200px',
-        borderRadius: '50%',
-        marginRight: '20px'
+        width: 170, 
+        height: 170, 
+        borderRadius: '50%'
     },
     closeButton: {
         position: 'absolute',
@@ -42,6 +41,9 @@ const styles = {
     },
     progressBlock: {
         textAlign: 'center'
+    }, 
+    body: {
+        fontSize: '1.3rem'
     }
 }
 
@@ -114,14 +116,11 @@ export class ScreamDialog extends Component {
                     <Grid item sm={4}>
                         <img src={userImage} alt="" className={classes.profileImage} />
                     </Grid>
-                    <Grid item sm={1}>
-
-                    </Grid>
-                    <Grid item sm={7}>
+                    <Grid item sm={8}>
                         <Typography
                             component={Link}
                             to={`/user/${userHandle}`}
-                            variant="h5"
+                            variant="h6"
                             color="primary">
                             @{userHandle}
                         </Typography>
@@ -133,7 +132,7 @@ export class ScreamDialog extends Component {
                         </Typography>
                         <br />
                         <Typography
-                            variant="body1">
+                            variant="body1" className={classes.body}>
                             {body}
                         </Typography>
                         <br />
@@ -146,7 +145,6 @@ export class ScreamDialog extends Component {
                         </Tooltip>
                         <span>{commentCount} comments</span>
                     </Grid>
-                    <hr />
                     <CommentForm screamId={screamId}/>
                     <CommentScream comments={comments} />
                 </Grid>
@@ -170,7 +168,6 @@ export class ScreamDialog extends Component {
                     </Tooltip>
                     <DialogContent className={classes.content}>
                         {dialogMarkup}
-
                     </DialogContent>
                 </Dialog>
             </Fragment>

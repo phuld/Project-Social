@@ -8,7 +8,8 @@ import {
     SET_UNAUTHENTICATED, 
     SET_AUTHENTICATED, 
     LOADING_USER, 
-    MARK_NOTIFICATIONS_READ
+    MARK_NOTIFICATIONS_READ, 
+    SET_MESSAGE
 } from '../types';
 
 export const loadingUI = () => {
@@ -126,9 +127,14 @@ export const authCheckState = () => {
 
 export const changeImage = (formData) => {
     return dispatch => {
+        dispatch(loadingUser());
         axios.post('/user/image', formData)
             .then(response => {
                 dispatch(getUserData())
+                dispatch({
+                    type: SET_MESSAGE, 
+                    payload: "Avatar changed successfully."
+                })
             })
             .catch(error => {
                 console.log(error);

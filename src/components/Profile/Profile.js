@@ -76,7 +76,7 @@ class Profile extends Component {
         const image = event.target.files[0];
         const formData = new FormData();
         formData.append('image', image, image.name);
-        this.props.onChangeImage(formData)
+        this.props.onChangeImage(formData);
     }
 
     handleEditImage = () => {
@@ -97,7 +97,7 @@ class Profile extends Component {
                 authenticated
             }
         } = this.props;
-        let profile = !loading ? (authenticated ? (
+        let profile = !loading ? authenticated ? (
             <Paper>
                 <div className={classes.profile}>
                     <div className={classes.blockImage}>
@@ -107,7 +107,7 @@ class Profile extends Component {
                             id="imageInput"
                             hidden={true}
                             onChange={this.handleImageChanged} />
-                        <Tooltip title="Edit Avatar">
+                        <Tooltip title="Change Avatar">
                             <IconButton onClick={this.handleEditImage} className={classes.iconEdit}>
                                 <EditIcon color="primary" />
                             </IconButton>
@@ -154,7 +154,7 @@ class Profile extends Component {
                         </Button>
                     </div>
                 </Paper>
-            )) : (
+            ) : (
                 <ProfileSkeletons />
             )
         return profile;
@@ -163,7 +163,8 @@ class Profile extends Component {
 
 Profile.propTypes = {
     user: PropTypes.object.isRequired,
-    onChangeImage: PropTypes.func.isRequired
+    onChangeImage: PropTypes.func.isRequired, 
+    onGetScreams: PropTypes.func
 }
 
 const mapStateToProps = state => {

@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import { Grid, TextField, Button } from '@material-ui/core';
 import { submitComment } from '../../redux/actions/dataActions';
+import { Link } from 'react-router-dom';
 
 const styles = {
     form: {
@@ -70,7 +71,7 @@ export class CommentForm extends Component {
                         className={classes.button}>Submit</Button>
                 </form>
             </Grid>
-        ) : null
+        ) : <p>Login <strong><Link to="/login">here</Link></strong> to comment this scream</p>
         return commentFormMarkup;
     }
 }

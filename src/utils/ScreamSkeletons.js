@@ -14,7 +14,7 @@ const styles = {
         height: '170px'
     },
     cardContent: {
-        padding: 0
+        padding: 20
     },
     userHandle: {
         width: '200px',

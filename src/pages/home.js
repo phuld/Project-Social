@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import ScreamSkeletons from '../utils/ScreamSkeletons';
 
 export class home extends Component {
-
+    
     componentDidMount() {
         this.props.onGetScreams();
     }
@@ -42,7 +42,8 @@ home.propTypes = {
 const mapStateToProps = state => {
     return {
         screams: state.data.screams, 
-        loading: state.data.loading
+        loading: state.data.loading, 
+        user: state.user
     }
 }
 
