@@ -10,15 +10,18 @@ import {
     CLEAR_ERROR,
     GET_SCREAM,
     STOP_LOADING_UI,
-    SUBMIT_COMMENT, 
-    SET_MESSAGE, 
-    CLEAR_MESSAGE
+    SUBMIT_COMMENT,
+    SET_MESSAGE,
+    CLEAR_MESSAGE,
+    EDIT_SCREAM,
+    GET_NUMBER_SCREAMS,
+    GET_SCREAMS_BY_PAGE
 } from '../types';
 import axios from 'axios';
 
 export const clearMessage = () => {
     return {
-        type: CLEAR_MESSAGE 
+        type: CLEAR_MESSAGE
     }
 }
 
@@ -78,7 +81,7 @@ export const likeScream = (screamId) => {
                     payload: response.data
                 })
                 dispatch({
-                    type: SET_MESSAGE, 
+                    type: SET_MESSAGE,
                     payload: 'Scream liked Successfully'
                 })
             })
@@ -98,7 +101,7 @@ export const unlikeScream = (screamId) => {
                     payload: response.data
                 })
                 dispatch({
-                    type: SET_MESSAGE, 
+                    type: SET_MESSAGE,
                     payload: 'Unlike scream successfully'
                 })
             })
@@ -118,7 +121,7 @@ export const deleteScream = (screamId) => {
                     payload: screamId
                 })
                 dispatch({
-                    type: SET_MESSAGE, 
+                    type: SET_MESSAGE,
                     payload: "Scream deleted successfully"
                 })
             })
@@ -170,6 +173,10 @@ export const submitComment = (screamId, commentData) => {
                     payload: response.data
                 })
                 dispatch(clearErrors())
+                dispatch({
+                    type: SET_MESSAGE, 
+                    payload: "Comment scream successfully"
+                })
             })
             .catch(error => {
                 dispatch({
@@ -188,15 +195,74 @@ export const getScreamsByUser = (userHandle) => {
         axios.get(`/user/${userHandle}`)
             .then(response => {
                 dispatch({
-                    type: GET_SCREAMS, 
+                    type: GET_SCREAMS,
                     payload: response.data.screams
                 })
             })
             .catch(error => {
                 dispatch({
-                    type: SET_ERROR, 
+                    type: SET_ERROR,
                     payload: []
                 })
+            })
+    }
+}
+
+export const editScream = (screamId, screamData) => {
+    return dispatch => {
+        dispatch({
+            type: LOADING_UI
+        })
+        axios.post(`/scream/${screamId}/edit`, screamData)
+            .then(response => {
+                dispatch({
+                    type: EDIT_SCREAM,
+                    payload: response.data
+                })
+                dispatch({
+                    type: STOP_LOADING_UI
+                })
+                dispatch({
+                    type: SET_MESSAGE,
+                    payload: "Scream edited successfully"
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: SET_ERROR,
+                    payload: error.response.data
+                })
+            })
+    }
+}
+
+export const getNumberScreams = () => {
+    return dispatch => {
+        axios.get('/number-screams')
+            .then(response => {
+                dispatch({
+                    type: GET_NUMBER_SCREAMS,
+                    payload: response.data.number
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+}
+
+export const getScreamsbyPage = (number) => {
+    return dispatch => {
+        dispatch(loadingData())
+        axios.get(`/screams/newsest/page/${number}`)
+            .then(response => {
+                dispatch({
+                    type: GET_SCREAMS_BY_PAGE, 
+                    payload: response.data
+                })
+            })
+            .catch(error => {
+                console.log(error);
             })
     }
 }

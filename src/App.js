@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -30,11 +30,12 @@ class App extends Component {
                     <Message/>
                     <div className='container'>
                         <Switch>
-                            <Route exact path="/" component={home} />
+                            <Route exact path="/newest" component={home} />
                             <AuthRoute exact path="/login" component={login} authenticated={authenticated} />
                             <AuthRoute exact path="/signup" component={signup} authenticated={authenticated} />
                             <Route exact path="/user/:userHandle" component={user}/>
                             <Route exact path="/user/:userHandle/scream/:screamId" component={user}/>
+                            <Route exact path="/" render={() => <Redirect to="/newest"/>} />
                         </Switch>
                     </div>
                 </BrowserRouter>

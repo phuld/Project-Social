@@ -18,11 +18,11 @@ export class Paginations extends Component {
         this.props.changePagination(number)
     }
     render() {
-        const { classes, screams, postPerPage } = this.props;
-        const count = Math.ceil(screams.length/postPerPage);
+        const { classes, numberScreams, postPerPage, defaultPage } = this.props;
+        const count = Math.ceil(numberScreams/postPerPage);
         return (
             <div className={classes.pagination}>
-                <Pagination count={count} variant="outlined" shape="rounded" onChange={(event, number) => this.handleChange(event, number)}/>
+                <Pagination count={count} defaultPage={defaultPage} variant="outlined" shape="rounded" onChange={(event, number) => this.handleChange(event, number)}/>
             </div>
         )
     }
@@ -31,12 +31,13 @@ export class Paginations extends Component {
 Paginations.propTypes = {
     classes: PropTypes.object.isRequired, 
     postPerPage: PropTypes.number.isRequired, 
-    changePagination: PropTypes.func.isRequired
+    changePagination: PropTypes.func.isRequired, 
+    defaultPage: PropTypes.number.isRequired
 }
 
 const mapStateToProps = state => {
     return {
-        screams: state.data.screams
+        numberScreams: state.data.number
     }
 }
 

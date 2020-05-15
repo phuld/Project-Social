@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -95,7 +95,7 @@ export class Notifications extends Component {
                 <MenuItem onClick={this.handleClose}>You have no notifications yet</MenuItem>
             )
         return (
-            <Fragment>
+            <div>
                 <IconButton
                     aria-controls="simple-menu"
                     aria-haspopup="true"
@@ -111,7 +111,7 @@ export class Notifications extends Component {
                     onEntered={this.onMenuOpened}>
                         {notificationMarkup}
                 </Menu>
-            </Fragment >
+            </div >
         )
     }
 }

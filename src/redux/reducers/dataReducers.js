@@ -6,13 +6,17 @@ import {
     DELETE_SCREAM, 
     POST_SCREAM, 
     GET_SCREAM,
-    SUBMIT_COMMENT
+    SUBMIT_COMMENT, 
+    EDIT_SCREAM, 
+    GET_NUMBER_SCREAMS,
+    GET_SCREAMS_BY_PAGE
 } from '../types';
 
 const initialState = {
     screams: [], 
     scream: {}, 
-    loading: false
+    loading: false, 
+    number: 0
 }
 
 const reducer = (state = initialState, action) => {
@@ -56,12 +60,29 @@ const reducer = (state = initialState, action) => {
                 scream: action.payload
             }
         case SUBMIT_COMMENT:
+            let indexComment = state.screams.findIndex(scream => scream.screamId === action.payload.screamId)
+            state.screams[indexComment] = action.payload
             return {
                 ...state, 
-                scream: {
-                    ...state.scream, 
-                    comments: [action.payload, ...state.scream.comments]
-                }
+                scream: action.payload
+            }
+        case EDIT_SCREAM:
+            const updateScream = action.payload;
+            let indexUpdate = state.screams.findIndex(scream => updateScream.screamId === scream.screamId);
+            state.screams[indexUpdate] = updateScream;
+            return {
+                ...state
+            }
+        case GET_NUMBER_SCREAMS: 
+            return { 
+                ...state, 
+                number: action.payload
+            }
+        case GET_SCREAMS_BY_PAGE:
+            return {
+                ...state, 
+                screams: action.payload, 
+                loading: false
             }
         default:
             return state;

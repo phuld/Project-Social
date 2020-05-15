@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
-import { Tooltip, IconButton, Dialog, Button } from '@material-ui/core';
+import { Dialog, Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -10,9 +10,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = {
     deleteButton: {
-        position: 'absolute', 
-        top: 0, 
+        position: 'absolute',
+        top: 0,
         right: 0
+    }, 
+    delete: {
+        display: 'flex'
     }
 }
 
@@ -45,11 +48,9 @@ export class DeleteScream extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <Tooltip title="Delete">
-                    <IconButton onClick={this.openHandler} className={classes.deleteButton}>
-                        <DeleteIcon color="inherit" />
-                    </IconButton>
-                </Tooltip>
+                <div onClick={this.openHandler} className={classes.delete}>
+                    <DeleteIcon color="inherit" /><span style={{ marginLeft: '5px' }}>Delete Tweet</span>
+                </div>
                 <Dialog
                     open={this.state.open}
                     onClose={this.closeHandler}>
@@ -69,7 +70,7 @@ export class DeleteScream extends Component {
 }
 
 DeleteScream.propTypes = {
-    screamId: PropTypes.string.isRequired, 
+    screamId: PropTypes.string.isRequired,
     classes: PropTypes.object.isRequired
 }
 

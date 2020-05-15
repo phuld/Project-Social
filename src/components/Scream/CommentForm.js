@@ -34,6 +34,15 @@ export class CommentForm extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.scream.commentCount !== this.props.scream.commentCount) {
+            this.setState({
+                body: '', 
+                errors: {}
+            })            
+        }
+    }
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -87,7 +96,8 @@ CommentForm.propTypes = {
 const mapStateToProps = state => {
     return {
         ui: state.ui,
-        authenticated: state.user.authenticated
+        authenticated: state.user.authenticated, 
+        scream: state.data.scream
     }
 }
 

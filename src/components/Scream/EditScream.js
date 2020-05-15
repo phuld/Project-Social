@@ -1,15 +1,18 @@
 import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux';
-import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import { postScream, clearErrors, getScreamsbyPage } from '../../redux/actions/dataActions';
+import withStyles from '@material-ui/core/styles/withStyles';
+import { connect } from 'react-redux';
+import EditIcon from '@material-ui/icons/Edit';
 import { Tooltip, IconButton, Dialog, DialogContent, TextField, Button, CircularProgress } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import { clearErrors } from '../../redux/actions/userActions';
+import { editScream, getOneScream } from '../../redux/actions/dataActions';
 
 const styles = {
+    button: {
+        display: 'flex'
+    },
     icon: {
         color: 'white'
     },
@@ -30,18 +33,27 @@ const styles = {
     },
     loading: {
         position: 'absolute'
+    }, 
+    dialogContent: {
+        textAlign: 'center'
     }
 }
 
-export class PostScream extends Component {
-
+export class EditScream extends Component {
     constructor(props) {
         super(props)
         this.state = {
             open: false,
-            body: '',
-            errors: {}
+            errors: {},
+            body: ''
         }
+    }
+
+
+    componentDidMount() {
+        this.setState({
+            body: this.props.scream.body
+        })
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -58,21 +70,11 @@ export class PostScream extends Component {
         return null;
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.data.screams !== this.props.data.screams) {
-            this.setState({
-                body: ''
-            });
-            this.handleClose();
-        }
-    }
-
     handleOpen = () => {
         this.setState({
-            open: true,
-            errors: {},
-            body: ''
+            open: true
         })
+        // this.props.onGetOneScream(this.props.screamId);
     }
 
     handleClose = () => {
@@ -85,10 +87,10 @@ export class PostScream extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const newScream = {
+        const updateScream = {
             body: this.state.body
         }
-        this.props.onPostScream(newScream);
+        this.props.onEditScream(this.props.screamId,updateScream);
     }
 
     handleChange = (event) => {
@@ -98,17 +100,13 @@ export class PostScream extends Component {
     }
 
     render() {
-        const { errors } = this.state;
         const { classes, ui: { loading } } = this.props;
+        const { open, errors } = this.state;
         return (
             <Fragment>
-                <Tooltip title="Add a new Scream">
-                    <IconButton onClick={this.handleOpen}>
-                        <AddIcon color="secondary" className={classes.icon} />
-                    </IconButton>
-                </Tooltip>
+                <div className={classes.button} onClick={this.handleOpen}><EditIcon /><span style={{ marginLeft: '5px' }}>Edit Tweet</span></div>
                 <Dialog
-                    open={this.state.open}
+                    open={open}
                     onClose={this.handleClose}
                     className={classes.dialog}
                     fullWidth>
@@ -118,12 +116,9 @@ export class PostScream extends Component {
                         </IconButton>
                     </Tooltip>
                     <DialogTitle>
-                        Post a new scream
+                        Edit scream
                     </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Please fill out the form below
-                        </DialogContentText>
+                    <DialogContent className={classes.dialogContent}>
                         <form onSubmit={this.handleSubmit}>
                             <TextField
                                 id="body"
@@ -154,27 +149,27 @@ export class PostScream extends Component {
     }
 }
 
-PostScream.propTypes = {
+EditScream.propTypes = {
     classes: PropTypes.object.isRequired,
-    ui: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    onPostScream: PropTypes.func.isRequired,
-    onClearErrors: PropTypes.func.isRequired
+    scream: PropTypes.object.isRequired,
+    ui: PropTypes.object.isRequired, 
+    screamId: PropTypes.string.isRequired, 
+    data: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
     return {
-        ui: state.ui,
+        ui: state.ui, 
         data: state.data
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onPostScream: (newScream) => dispatch(postScream(newScream)),
-        onClearErrors: () => dispatch(clearErrors()), 
-        onGetScreamsbyPage: (numberPage) => dispatch(getScreamsbyPage(numberPage))
+        onClearErrors: () => dispatch(clearErrors()),
+        onEditScream: (screamId, screamData) => dispatch(editScream(screamId, screamData)), 
+        onGetOneScream: (screamId) => dispatch(getOneScream(screamId))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PostScream))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EditScream))

@@ -10,9 +10,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Typography, Tooltip, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import DeleteScream from './DeleteScream';
 import ScreamDialog from './ScreamDialog';
 import LikeButton from '../UI/LikeButton';
+import ActionScream from './ActionScream';
 
 const styles = {
     card: {
@@ -50,6 +50,7 @@ export class Scream extends Component {
         dayjs.extend(relativeTime);
         const {
             classes,
+            scream,
             scream: {
                 body,
                 userHandle,
@@ -59,19 +60,7 @@ export class Scream extends Component {
                 userImage,
                 screamId
             },
-            user: {
-                authenticated,
-                credentials: {
-                    handle
-                }
-            }
         } = this.props;
-
-        const deleteButton = authenticated ? (
-            handle === this.props.scream.userHandle ? (
-                <DeleteScream screamId={screamId} userHandle={handle} />
-            ) : null
-        ) : null
 
         return (
             <Card className={classes.card}>
@@ -99,7 +88,13 @@ export class Scream extends Component {
                         <span>{commentCount} comments</span>
                         <ScreamDialog screamId={screamId} openDialog={this.props.openDialog} userHandle={userHandle} />
                     </div>
-                    {deleteButton}
+                    {/* {deleteButton} */}
+                    {/* <Tooltip titile="Action Scream">
+                        <IconButton>
+                            <ExpandMoreIcon color="primary"/>
+                        </IconButton>
+                    </Tooltip> */}  
+                    <ActionScream screamId={screamId} userHandle={userHandle} scream={scream}/>
                 </CardContent>
             </Card>
         )
