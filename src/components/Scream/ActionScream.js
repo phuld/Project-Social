@@ -65,7 +65,7 @@ export class ActionScream extends Component {
         const displayAction = authenticated ? userHandle === handle ? (
             <div>
                 <MenuItem onClick={this.handleClose} className={classes.menuItem}>
-                    <EditScream scream={scream} screamId={screamId}/>
+                    <EditScream screamId={screamId}/>
                 </MenuItem>
                 <MenuItem onClick={this.handleClose}>
                     <NoEncryptionIcon /><span style={{ marginLeft: '5px' }}>Disabled Tweet</span>

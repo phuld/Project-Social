@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import { getOneScream, clearErrors } from '../../redux/actions/dataActions';
+import { getOneScream, clearErrors, clearScream } from '../../redux/actions/dataActions';
 import { Tooltip, IconButton, Dialog, DialogContent, CircularProgress, Grid, Typography } from '@material-ui/core';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import CloseIcon from '@material-ui/icons/Close';
@@ -87,6 +87,7 @@ export class ScreamDialog extends Component {
             open: false
         })
         this.props.onClearErrors();
+        this.props.onClearScream();
     }
 
     render() {
@@ -180,7 +181,8 @@ ScreamDialog.propTypes = {
     scream: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired, 
     onGetOneScream: PropTypes.func.isRequired, 
-    onClearErrors: PropTypes.func.isRequired
+    onClearErrors: PropTypes.func.isRequired, 
+    onClearScream: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
@@ -194,7 +196,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onGetOneScream: (screamId) => dispatch(getOneScream(screamId)), 
-        onClearErrors: () => dispatch(clearErrors())
+        onClearErrors: () => dispatch(clearErrors()), 
+        onClearScream: () => dispatch(clearScream())
     }
 }
 

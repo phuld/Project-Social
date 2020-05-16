@@ -9,7 +9,8 @@ import {
     SUBMIT_COMMENT, 
     EDIT_SCREAM, 
     GET_NUMBER_SCREAMS,
-    GET_SCREAMS_BY_PAGE
+    GET_SCREAMS_BY_PAGE, 
+    CLEAR_SCREAM
 } from '../types';
 
 const initialState = {
@@ -58,6 +59,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 scream: action.payload
+            }
+        case CLEAR_SCREAM: 
+            return {
+                ...state, 
+                scream: {}, 
+                loading: false
             }
         case SUBMIT_COMMENT:
             let indexComment = state.screams.findIndex(scream => scream.screamId === action.payload.screamId)

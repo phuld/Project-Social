@@ -26,7 +26,7 @@ export class CommentScream extends Component {
         const { comments, classes } = this.props;
         return (
             <Grid container>
-                {comments.map((comment, index) => {
+                {comments && comments.map((comment, index) => {
                     const { userHandle, userImage, body, createdAt } = comment;
                     return (
                         <Fragment key={index}>

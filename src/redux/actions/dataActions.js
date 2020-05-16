@@ -15,7 +15,8 @@ import {
     CLEAR_MESSAGE,
     EDIT_SCREAM,
     GET_NUMBER_SCREAMS,
-    GET_SCREAMS_BY_PAGE
+    GET_SCREAMS_BY_PAGE, 
+    CLEAR_SCREAM
 } from '../types';
 import axios from 'axios';
 
@@ -264,5 +265,11 @@ export const getScreamsbyPage = (number) => {
             .catch(error => {
                 console.log(error);
             })
+    }
+}
+
+export const clearScream = () => {
+    return {
+        type: CLEAR_SCREAM
     }
 }
