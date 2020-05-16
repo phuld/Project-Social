@@ -86,7 +86,7 @@ export class ActionScream extends Component {
                     aria-haspopup="true"
                     onClick={this.handleClick}
                     className={classes.expandIcon}>
-                    <ExpandMoreIcon color="primary" />
+                    {authenticated && <ExpandMoreIcon color="primary" />}
                 </IconButton>
                 <Menu
                     id="simple-menu"

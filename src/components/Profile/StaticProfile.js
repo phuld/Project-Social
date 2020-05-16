@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import {Paper, Typography } from '@material-ui/core'
-import {Link} from 'react-router-dom';
+import { Paper, Typography, Avatar } from '@material-ui/core'
+import { Link } from 'react-router-dom';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import DateRangeIcon from '@material-ui/icons/DateRange';
@@ -19,7 +19,8 @@ const styles = {
     profileImage: {
         width: '170px',
         height: '170px',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        margin: 'auto'
     },
     blockCenter: {
         // display: 'flex',
@@ -82,7 +83,8 @@ export class StaticProfile extends Component {
             <Paper>
                 <div className={classes.profile}>
                     <div className={classes.blockImage}>
-                        <img src={imageUrl} alt="" className={classes.profileImage} />
+                        {/* <img src={imageUrl} alt="" className={classes.profileImage} /> */}
+                        <Avatar alt="avatar" src={imageUrl} className={classes.profileImage} />
                         <input
                             type="file"
                             id="imageInput"

@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { markNotificationsRead } from '../../redux/actions/userActions';
-import { Badge, Typography, Menu } from '@material-ui/core';
+import { Badge, Typography, Menu, Tooltip } from '@material-ui/core';
 import dayjs from 'dayjs';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -62,9 +62,9 @@ export class Notifications extends Component {
                     <Badge badgeContent={notifications.filter(noti => noti.read === false).length} color='secondary'>
                         <NotificationsIcon className={classes.icon} />
                     </Badge>
-                ) : notificationIcon = (<NotificationsIcon className={classes.icon}/>)
+                ) : notificationIcon = (<NotificationsIcon className={classes.icon} />)
         } else {
-            notificationIcon = (<NotificationsIcon className={classes.icon}/>)
+            notificationIcon = (<NotificationsIcon className={classes.icon} />)
         }
         const notificationMarkup = notifications && notifications.length > 0 ? (
             notifications.map(noti => {
@@ -96,12 +96,14 @@ export class Notifications extends Component {
             )
         return (
             <div>
-                <IconButton
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={this.handleClick}>
-                    {notificationIcon}
-                </IconButton>
+                <Tooltip title="Notifications">
+                    <IconButton
+                        aria-controls="simple-menu"
+                        aria-haspopup="true"
+                        onClick={this.handleClick}>
+                        {notificationIcon}
+                    </IconButton>
+                </Tooltip>
                 <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
@@ -109,7 +111,7 @@ export class Notifications extends Component {
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                     onEntered={this.onMenuOpened}>
-                        {notificationMarkup}
+                    {notificationMarkup}
                 </Menu>
             </div >
         )

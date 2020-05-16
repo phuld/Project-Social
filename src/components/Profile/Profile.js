@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
-import { Paper, Typography, Button, IconButton, Tooltip } from '@material-ui/core';
+import { Paper, Typography, Button, IconButton, Tooltip, Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
@@ -24,7 +24,8 @@ const styles = {
     profileImage: {
         width: '170px',
         height: '170px',
-        borderRadius: '50%'
+        borderRadius: '50%', 
+        margin: 'auto'
     },
     blockCenter: {
         // display: 'flex',
@@ -101,7 +102,8 @@ class Profile extends Component {
             <Paper>
                 <div className={classes.profile}>
                     <div className={classes.blockImage}>
-                        <img src={imageUrl} alt="" className={classes.profileImage} />
+                        {/* <img src={imageUrl} alt="" className={classes.profileImage} /> */}
+                        <Avatar alt="avatar" src={imageUrl} className={classes.profileImage}/>
                         <input
                             type="file"
                             id="imageInput"

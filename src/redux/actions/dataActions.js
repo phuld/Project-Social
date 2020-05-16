@@ -19,6 +19,7 @@ import {
     CLEAR_SCREAM
 } from '../types';
 import axios from 'axios';
+import * as messages from '../messages';
 
 export const clearMessage = () => {
     return {
@@ -83,7 +84,7 @@ export const likeScream = (screamId) => {
                 })
                 dispatch({
                     type: SET_MESSAGE,
-                    payload: 'Scream liked Successfully'
+                    payload: messages.MESSAGE_LIKE_SCREAM
                 })
             })
             .catch(error => {
@@ -103,7 +104,7 @@ export const unlikeScream = (screamId) => {
                 })
                 dispatch({
                     type: SET_MESSAGE,
-                    payload: 'Unlike scream successfully'
+                    payload: messages.MESSAGE_UNLIKE_SCREAM
                 })
             })
             .catch(error => {
@@ -123,7 +124,7 @@ export const deleteScream = (screamId) => {
                 })
                 dispatch({
                     type: SET_MESSAGE,
-                    payload: "Scream deleted successfully"
+                    payload: messages.MESSAGE_DELETE_SCREAM
                 })
             })
             .catch(error => {
@@ -146,6 +147,10 @@ export const postScream = (newScream) => {
                 })
                 dispatch({
                     type: CLEAR_ERROR
+                })
+                dispatch({
+                    type: SET_MESSAGE, 
+                    payload: messages.MESSAGE_CREATE_SCREAM
                 })
             })
             .catch(error => {
@@ -176,7 +181,7 @@ export const submitComment = (screamId, commentData) => {
                 dispatch(clearErrors())
                 dispatch({
                     type: SET_MESSAGE, 
-                    payload: "Comment scream successfully"
+                    payload: messages.MESSAGE_COMMENT_SCREAM
                 })
             })
             .catch(error => {
@@ -225,7 +230,7 @@ export const editScream = (screamId, screamData) => {
                 })
                 dispatch({
                     type: SET_MESSAGE,
-                    payload: "Scream edited successfully"
+                    payload: messages.MESSAGE_EDIT_SCREAM
                 })
             })
             .catch(error => {
