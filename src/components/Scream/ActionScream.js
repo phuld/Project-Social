@@ -67,18 +67,14 @@ export class ActionScream extends Component {
                 <MenuItem onClick={this.handleClose} className={classes.menuItem}>
                     <EditScream screamId={screamId}/>
                 </MenuItem>
-                <MenuItem onClick={this.handleClose}>
+                {/* <MenuItem onClick={this.handleClose}>
                     <NoEncryptionIcon /><span style={{ marginLeft: '5px' }}>Disabled Tweet</span>
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem onClick={this.handleClose} className={classes.menuItem}>
                     <DeleteScream screamId={screamId} />
                 </MenuItem>
             </div>
-        ) : (
-                <MenuItem onClick={this.handleClose}><BlockIcon /><span style={{ marginLeft: '5px' }}>Block Tweet</span></MenuItem>
-            ) : (
-                <MenuItem onClick={this.handleClose}><BlockIcon /><span style={{ marginLeft: '5px' }}>Block Tweet</span></MenuItem>
-            )
+        ) : null : null;
         return (
             <div className={classes.actionScream}>
                 <IconButton

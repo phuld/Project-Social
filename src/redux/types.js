@@ -12,6 +12,7 @@ export const LOADING_DATA = 'LOADING_DATA';
 export const STOP_LOADING_UI = 'STOP_LOADING_UI';
 export const SET_MESSAGE = 'SET_MESSAGE';
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
+export const CHANGE_TYPE = 'CHANGE_TYPE';
 
 //Data Reducers
 export const GET_SCREAMS = "GET_SCREAMS";

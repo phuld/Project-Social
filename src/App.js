@@ -22,7 +22,7 @@ class App extends Component {
         this.props.onAuthCheckState();
     }
     render() {
-        const { user: { authenticated } } = this.props;
+        const { user: { authenticated }, type } = this.props;
         return (
             <MuiThemeProvider theme={theme}>
                 <BrowserRouter>
@@ -31,6 +31,8 @@ class App extends Component {
                     <div className='container'>
                         <Switch>
                             <Route exact path="/newest" component={home} />
+                            <Route exact path="/most-comments" component={home} />
+                            <Route exact path="/most-likes" component={home} />
                             <AuthRoute exact path="/login" component={login} authenticated={authenticated} />
                             <AuthRoute exact path="/signup" component={signup} authenticated={authenticated} />
                             <Route exact path="/user/:userHandle" component={user}/>
@@ -51,7 +53,8 @@ App.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user, 
+        type: state.data.type
     }
 }
 

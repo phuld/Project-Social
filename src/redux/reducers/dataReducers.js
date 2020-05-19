@@ -10,14 +10,16 @@ import {
     EDIT_SCREAM, 
     GET_NUMBER_SCREAMS,
     GET_SCREAMS_BY_PAGE, 
-    CLEAR_SCREAM
+    CLEAR_SCREAM,
+    CHANGE_TYPE
 } from '../types';
 
 const initialState = {
     screams: [], 
     scream: {}, 
     loading: false, 
-    number: 0
+    number: 0, 
+    type: 'newest'
 }
 
 const reducer = (state = initialState, action) => {
@@ -89,7 +91,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 screams: action.payload, 
-                loading: false
+                loading: false, 
+                type: action.sortBy
+            }
+        case CHANGE_TYPE:
+            return {
+                ...state, 
+                type: action.payload
             }
         default:
             return state;

@@ -60,6 +60,7 @@ export class Scream extends Component {
                 userImage,
                 screamId
             },
+            user
         } = this.props;
 
         return (
@@ -94,7 +95,7 @@ export class Scream extends Component {
                             <ExpandMoreIcon color="primary"/>
                         </IconButton>
                     </Tooltip> */}  
-                    <ActionScream screamId={screamId} userHandle={userHandle} scream={scream}/>
+                    {user.credentials && userHandle === user.credentials.handle && <ActionScream screamId={screamId} userHandle={userHandle} scream={scream}/>}
                 </CardContent>
             </Card>
         )

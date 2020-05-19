@@ -16,7 +16,8 @@ import {
     EDIT_SCREAM,
     GET_NUMBER_SCREAMS,
     GET_SCREAMS_BY_PAGE, 
-    CLEAR_SCREAM
+    CLEAR_SCREAM, 
+    CHANGE_TYPE
 } from '../types';
 import axios from 'axios';
 import * as messages from '../messages';
@@ -172,13 +173,18 @@ export const clearErrors = () => {
 
 export const submitComment = (screamId, commentData) => {
     return dispatch => {
+        dispatch({
+            type: LOADING_UI
+        })
         axios.post(`/scream/${screamId}/comment`, commentData)
             .then(response => {
                 dispatch({
                     type: SUBMIT_COMMENT,
                     payload: response.data
                 })
-                dispatch(clearErrors())
+                dispatch({
+                    type: STOP_LOADING_UI
+                })
                 dispatch({
                     type: SET_MESSAGE, 
                     payload: messages.MESSAGE_COMMENT_SCREAM
@@ -257,14 +263,15 @@ export const getNumberScreams = () => {
     }
 }
 
-export const getScreamsbyPage = (number) => {
+export const getScreamsbyPage = (type, number) => {
     return dispatch => {
         dispatch(loadingData())
-        axios.get(`/screams/newsest/page/${number}`)
+        axios.get(`/screams/${type}/page/${number}`)
             .then(response => {
                 dispatch({
                     type: GET_SCREAMS_BY_PAGE, 
-                    payload: response.data
+                    payload: response.data, 
+                    sortBy: type
                 })
             })
             .catch(error => {
@@ -276,5 +283,12 @@ export const getScreamsbyPage = (number) => {
 export const clearScream = () => {
     return {
         type: CLEAR_SCREAM
+    }
+}
+
+export const changeType = (type) => {
+    return {
+        type: CHANGE_TYPE, 
+        payload: type
     }
 }

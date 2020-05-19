@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { getScreamsbyPage } from '../../redux/actions/dataActions';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,7 +16,7 @@ import Notifications from './Notifications';
 const styles = {
     container: {
         margin: 'auto'
-    }, 
+    },
     icon: {
         color: 'white'
     }
@@ -23,19 +24,24 @@ const styles = {
 
 export class Navbar extends Component {
 
+    handleClick = () => {
+        this.props.onGetScreamsByPage("newest", 1);
+        this.props.history.push("/newest")
+    }
+
     render() {
         const { authenticated, classes } = this.props;
         return (
             <AppBar position="fixed">
                 {authenticated ? (
                     <Toolbar className={classes.container}>
-                        <PostScream/>
+                        <PostScream />
                         <Tooltip title="Home">
-                            <IconButton component={Link} to="/newest">
-                                <HomeIcon color="action" className={classes.icon}/>
+                            <IconButton onClick={this.handleClick}>
+                                <HomeIcon color="action" className={classes.icon} />
                             </IconButton>
-                        </Tooltip> 
-                        <Notifications/>                        
+                        </Tooltip>
+                        <Notifications />
                     </Toolbar>
                 ) : (
                         <Toolbar className={classes.container}>
@@ -62,8 +68,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        onGetScreamsByPage: (type, number) => dispatch(getScreamsbyPage(type, number))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Navbar))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withRouter(Navbar)))
