@@ -12,7 +12,7 @@ const styles = {
             display: 'none'
         }, 
         fontWeight: 'bold', 
-        color: "#0e0ecac4"
+        color: "#0b0b65"
     }
     
 }

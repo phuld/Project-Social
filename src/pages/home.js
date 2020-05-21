@@ -12,41 +12,36 @@ import { changeType } from '../redux/actions/dataActions';
 
 export class home extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            currentPage: 1,
-            postPerPage: 10
-        }
-    }
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //         currentPage: 1,
+    //         postPerPage: 10
+    //     }
+    // }
 
 
     componentDidMount() {
-        // if(this.props.match.path !== this.props.type) {
-        //     this.props.onChangeType(this.props.match.path)
-        // }
-        // this.props.onGetScreams();
-        // console.log(this.props.location.search);
         const queryString = new URLSearchParams(this.props.location.search);
         let pageNumber = 1;
         for (let key of queryString) {
             if (key[0] === "page") {
                 pageNumber = +key[1];
-                this.setState({
-                    currentPage: +key[1]
-                })
+                // this.setState({
+                //     currentPage: +key[1]
+                // })
             }
         }
         this.props.onGetScreamsbyPages(this.props.type, pageNumber);
         this.props.onGetNumberScreams();
     }
 
-
     componentDidUpdate(prevProps, prevState) {
         // if(prevProps.scream.commentCount !== this.props.scream.commentCount){
         //     this.props.onGetScreamsbyPages(this.state.currentPage);
         // }
         // console.log(prevProps.type, this.props.type);
+        const currentUrl = (this.props.match.path).split('/')[1];
         const queryString = new URLSearchParams(this.props.location.search);
         let pageNumber = 1;
         for (let key of queryString) {
@@ -54,7 +49,8 @@ export class home extends Component {
                 pageNumber = +key[1];
             }
         }
-        if (prevProps.type !== this.props.type || (prevProps.user.credentials.imageUrl && prevProps.user.credentials.imageUrl !== this.props.user.credentials.imageUrl)) {
+        if ( (prevProps.type !== this.props.type) || (prevProps.user.credentials.imageUrl && prevProps.user.credentials.imageUrl !== this.props.user.credentials.imageUrl)) {
+            this.props.onChangeType(currentUrl);
             this.props.onGetScreamsbyPages(this.props.type, 1);
             this.setState({
                 currentPage: pageNumber
@@ -82,14 +78,14 @@ export class home extends Component {
     }
 
     render() {
-        const { screams, loading } = this.props;
-        const { currentPage, postPerPage } = this.state;
+        const { screams, loading, currentPage } = this.props;
+        // const { currentPage, postPerPage } = this.state;
         const displayScream = !loading ?
             (screams.map(scream => (
                 <Scream scream={scream} key={scream.screamId} />
             ))) : <ScreamSkeletons />;
         const displayPagination = !loading ? (
-            <Paginations defaultPage={currentPage} postPerPage={postPerPage} changePagination={this.changePagination} />
+            <Paginations defaultPage={currentPage} postPerPage={10} changePagination={this.changePagination} />
         ) : null;
         return (
             <div>
@@ -121,6 +117,7 @@ const mapStateToProps = state => {
         user: state.user,
         scream: state.data.scream,
         type: state.data.type,
+        currentPage: state.data.currentPage
     }
 }
 

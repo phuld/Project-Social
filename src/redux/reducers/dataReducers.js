@@ -19,7 +19,8 @@ const initialState = {
     scream: {}, 
     loading: false, 
     number: 0, 
-    type: 'newest'
+    type: 'newest', 
+    currentPage: 1
 }
 
 const reducer = (state = initialState, action) => {
@@ -92,7 +93,8 @@ const reducer = (state = initialState, action) => {
                 ...state, 
                 screams: action.payload, 
                 loading: false, 
-                type: action.sortBy
+                type: action.sortBy, 
+                currentPage: action.currentPage
             }
         case CHANGE_TYPE:
             return {

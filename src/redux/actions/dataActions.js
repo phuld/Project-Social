@@ -271,7 +271,8 @@ export const getScreamsbyPage = (type, number) => {
                 dispatch({
                     type: GET_SCREAMS_BY_PAGE, 
                     payload: response.data, 
-                    sortBy: type
+                    sortBy: type, 
+                    currentPage: number
                 })
             })
             .catch(error => {
