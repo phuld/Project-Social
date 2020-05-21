@@ -22,7 +22,7 @@ class App extends Component {
         this.props.onAuthCheckState();
     }
     render() {
-        const { user: { authenticated }, type } = this.props;
+        const { user: { authenticated } } = this.props;
         return (
             <MuiThemeProvider theme={theme}>
                 <BrowserRouter>

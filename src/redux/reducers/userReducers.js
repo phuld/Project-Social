@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 likes: state.likes.filter(like => like.screamId !== action.payload.screamId)
             }
-        case actionTypes.MARK_NOTIFICATIONS_READ:
+        case actionTypes.MARK_NOTIFICATIONS_READ_SUCCESS:
             state.notifications.forEach(noti => noti.read = true)
             return {
                 ...state

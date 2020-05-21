@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Tooltip, IconButton, Dialog, DialogContent, TextField, Button, CircularProgress } from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
-import { clearErrors } from '../../redux/actions/userActions';
+import { clearError } from '../../redux/actions/uiActions';
 import { editScream, getOneScream, clearScream } from '../../redux/actions/dataActions';
 
 const styles = {
@@ -193,7 +193,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClearErrors: () => dispatch(clearErrors()),
+        onClearErrors: () => dispatch(clearError()),
         onEditScream: (screamId, screamData) => dispatch(editScream(screamId, screamData)),
         onGetOneScream: (screamId) => dispatch(getOneScream(screamId)), 
         onClearScream: () => dispatch(clearScream())

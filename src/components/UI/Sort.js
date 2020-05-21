@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Typography, NativeSelect, } from '@material-ui/core';
 import { changeType } from '../../redux/actions/dataActions';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const styles = {
     select: { 

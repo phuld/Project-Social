@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
-import { loginUser, clearErrors } from '../redux/actions/userActions';
+import { loginUser } from '../redux/actions/userActions';
+import { clearError } from '../redux/actions/uiActions';
 import { changeType } from '../redux/actions/dataActions';
 import PropTypes from 'prop-types';
 import IconImage from '../assets/images/logo.jpeg';
@@ -28,6 +29,11 @@ class login extends Component {
         this.props.onClearErrors()
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.user.authenticated === true) {
+            this.props.history.push('/newest')
+        }
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -35,7 +41,7 @@ class login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        this.props.loginUser(userData, this.props.history);
+        this.props.loginUser(userData);
         this.props.onChangeType('newest');
     }
 
@@ -83,7 +89,7 @@ login.propTypes = {
     loginUser: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired,
-    onClearErrors: PropTypes.func.isRequired, 
+    onClearErrors: PropTypes.func.isRequired,
     onChangeType: PropTypes.func.isRequired
 }
 
@@ -96,8 +102,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginUser: (userData, history) => dispatch(loginUser(userData, history)),
-        onClearErrors: () => dispatch(clearErrors()), 
+        loginUser: (userData) => dispatch(loginUser(userData)),
+        onClearErrors: () => dispatch(clearError()),
         onChangeType: (type) => dispatch(changeType(type))
     }
 }

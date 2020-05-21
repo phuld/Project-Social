@@ -3,8 +3,12 @@ import thunk from 'redux-thunk';
 import userReducers from './reducers/userReducers';
 import uiReducers from './reducers/uireducers';
 import dataReducers from './reducers/dataReducers';
+import createSagaMiddleware from 'redux-saga';
+import { watchAuth } from '../redux/sagas/index';
 
 // const initialState = {};
+
+const sagaMiddleware = createSagaMiddleware();
 
 const reducers = combineReducers({
     user: userReducers, 
@@ -15,7 +19,9 @@ const reducers = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducers, composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, sagaMiddleware)
 ))
+
+sagaMiddleware.run(watchAuth)
 
 export default store;

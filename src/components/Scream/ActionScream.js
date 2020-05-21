@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { Menu, MenuItem, IconButton } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteScream from './DeleteScream';
-import NoEncryptionIcon from '@material-ui/icons/NoEncryption';
-import BlockIcon from '@material-ui/icons/Block';
 import EditScream from './EditScream';
 
 const styles = {
@@ -52,7 +50,6 @@ export class ActionScream extends Component {
         const {
             classes,
             screamId,
-            scream,
             user: {
                 authenticated,
                 credentials: {

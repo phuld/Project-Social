@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
-import { signupUser, clearErrors } from '../redux/actions/userActions';
-
+import { signupUser } from '../redux/actions/userActions';
+import { clearError } from '../redux/actions/uiActions';
 import PropTypes from 'prop-types';
 import IconImage from '../assets/images/logo.jpeg';
 import Grid from '@material-ui/core/Grid';
@@ -26,11 +26,11 @@ class signup extends Component {
         }
     }
 
-    
+
     componentDidMount() {
         this.props.onClearErrors();
     }
-    
+
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -40,7 +40,7 @@ class signup extends Component {
             confirmPassword: this.state.confirmPassword,
             handle: this.state.handle
         }
-        this.props.onSignup(newUserData, this.props.history);
+        this.props.onSignup(newUserData);
     }
 
     handleChange = (event) => {
@@ -50,7 +50,7 @@ class signup extends Component {
     }
 
     render() {
-        const { classes, ui: {loading, errors} } = this.props;
+        const { classes, ui: { loading, errors } } = this.props;
         return (
             <Grid container className={classes.form}>
                 <Grid item sm />
@@ -90,24 +90,24 @@ class signup extends Component {
 }
 
 signup.propTypes = {
-    classes: PropTypes.object.isRequired, 
-    user: PropTypes.object.isRequired, 
-    ui: PropTypes.object.isRequired, 
-    onSignup: PropTypes.func.isRequired, 
+    classes: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    ui: PropTypes.object.isRequired,
+    onSignup: PropTypes.func.isRequired,
     onClearErrors: PropTypes.func.isRequired
 }
 
 const mapStateToprops = state => {
     return {
-        user: state.user, 
+        user: state.user,
         ui: state.ui
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignup: (userData, history) => dispatch(signupUser(userData, history)), 
-        onClearErrors: () => dispatch(clearErrors())
+        onSignup: (userData) => dispatch(signupUser(userData)),
+        onClearErrors: () => dispatch(clearError())
     }
 }
 
