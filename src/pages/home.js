@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Scream from '../components/Scream/Scream';
 import Profile from '../components/Profile/Profile';
 import { connect } from 'react-redux';
-import { getScreams, getScreamsbyPage, getNumberScreams } from '../redux/actions/dataActions';
+import { getScreamsbyPage, getNumberScreams } from '../redux/actions/dataActions';
 import PropTypes from 'prop-types';
 import ScreamSkeletons from '../utils/ScreamSkeletons';
 import Paginations from '../components/Paginations/Paginations';
@@ -11,14 +11,6 @@ import Sort from '../components/UI/Sort';
 import { changeType } from '../redux/actions/dataActions';
 
 export class home extends Component {
-
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         currentPage: 1,
-    //         postPerPage: 10
-    //     }
-    // }
 
 
     componentDidMount() {
@@ -37,10 +29,6 @@ export class home extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // if(prevProps.scream.commentCount !== this.props.scream.commentCount){
-        //     this.props.onGetScreamsbyPages(this.state.currentPage);
-        // }
-        // console.log(prevProps.type, this.props.type);
         const currentUrl = (this.props.match.path).split('/')[1];
         const queryString = new URLSearchParams(this.props.location.search);
         let pageNumber = 1;
@@ -56,16 +44,9 @@ export class home extends Component {
                 currentPage: pageNumber
             })
         }
-
-        // console.log(prevProps.user.credentials.imageUrl, this.props.user.credentials.imageUrl);
-        // console.log(window.location.pathname);
-        // console.log(prevState.currentPage, this.state.currentPage);
     }
 
     changePagination = (number) => {
-        this.setState({
-            currentPage: number
-        })
         window.scrollTo({
             top: 0
         });
@@ -106,7 +87,6 @@ export class home extends Component {
 }
 
 home.propTypes = {
-    onGetScreams: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired
 }
 
@@ -123,7 +103,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetScreams: () => dispatch(getScreams()),
         onGetScreamsbyPages: (type, numberPage) => dispatch(getScreamsbyPage(type, numberPage)),
         onGetNumberScreams: () => dispatch(getNumberScreams()), 
         onChangeType: (type) => dispatch(changeType(type))

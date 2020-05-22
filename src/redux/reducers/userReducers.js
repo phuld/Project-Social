@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loading: true
             }
-        case actionTypes.LIKE_SCREAM:
+        case actionTypes.LIKE_SCREAM_SUCCESS:
             return {
                 ...state,
                 likes: [
@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
                     }
                 ]
             }
-        case actionTypes.UNLIKE_SCREAM:
+        case actionTypes.UNLIKE_SCREAM_SUCCESS:
             return {
                 ...state,
                 likes: state.likes.filter(like => like.screamId !== action.payload.screamId)

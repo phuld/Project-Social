@@ -25,11 +25,13 @@ export function* loginUserSaga(action) {
     yield put(loadingUI());
     try {
         const response = yield axios.post('/login', action.userData);
+        yield action.history.push('/')
         const authToken = `Bear ${response.data.token}`;
         yield localStorage.setItem('authToken', authToken);
         axios.defaults.headers.common['Authorization'] = authToken;
         yield put(getUserData());
         yield put(clearError());
+        
     } catch (error) {
         yield put(setError(error.response.data));
     }

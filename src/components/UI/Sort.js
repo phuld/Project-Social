@@ -31,7 +31,8 @@ export class Sort extends Component {
     render() {
         const { type, classes } = this.props;
         return (
-            <Typography variant="body1" color="textSecondary">Sort by:
+            <Typography variant="body1" color="textSecondary">
+                <span>Sort by:</span>
                 <NativeSelect
                     // defaultValue="newest"
                     value={type}

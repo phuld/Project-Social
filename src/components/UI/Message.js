@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { clearMessage } from '../../redux/actions/dataActions';
+import { clearMessage } from '../../redux/actions/uiActions';
 
 const Alert = (props) => (
     <MuiAlert elevation={6} variant="filled" {...props} />

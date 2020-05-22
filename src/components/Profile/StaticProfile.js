@@ -7,6 +7,10 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import dayjs from 'dayjs';
+import { connect } from 'react-redux';
+import { getOtherUser } from '../../redux/actions/otherUserReducers';
+import { withRouter } from 'react-router-dom';
+import ProfileSkeletons from '../../utils/ProfileSkeletons';
 
 const styles = {
     profile: {
@@ -23,9 +27,6 @@ const styles = {
         margin: 'auto'
     },
     blockCenter: {
-        // display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'center',
         textAlign: 'initial',
         marginBottom: '10px',
         display: 'flex'
@@ -67,19 +68,26 @@ const styles = {
 }
 
 export class StaticProfile extends Component {
+
+    componentDidMount() {
+        // console.log(this.props.match.params.userHandle);
+        this.props.onGetOtherUser(this.props.match.params.userHandle)
+    }
+
     render() {
         const {
             classes,
-            user: {
-                handle,
-                bio,
-                imageUrl,
-                createdAt,
-                location,
-                website
-            }
+            data: {
+                imageUrl, 
+                createdAt, 
+                bio, 
+                website, 
+                location, 
+                handle
+            }, 
+            loading
         } = this.props;
-        return (
+        let otherUserMarkup = !loading ? (
             <Paper>
                 <div className={classes.profile}>
                     <div className={classes.blockImage}>
@@ -112,13 +120,29 @@ export class StaticProfile extends Component {
                     </div>
                 </div>
             </Paper>
-        )
+        ) : <ProfileSkeletons/>
+
+        return otherUserMarkup;
+
     }
 }
 
 StaticProfile.propTypes = {
     classes: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    otherUser: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(StaticProfile); 
+const mapStateToProps = state => {
+    return {
+        data: state.otherUser.data, 
+        loading: state.otherUser.loading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetOtherUser: (userHandle) => dispatch(getOtherUser(userHandle))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withRouter(StaticProfile))); 

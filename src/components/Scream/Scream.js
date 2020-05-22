@@ -73,7 +73,7 @@ export class Scream extends Component {
                     <Typography
                         variant='h6'
                         component={Link}
-                        to={`/user/${userHandle}`}
+                        to={`/user/${userHandle}?sortBy=newest&page=1`}
                         color='primary'>{userHandle}</Typography>
                     <Typography variant='body2' color="textSecondary" className={classes.date}>{dayjs(createdAt).fromNow()}</Typography>
                     <Typography variant='body1' className={classes.body}>{body}</Typography>

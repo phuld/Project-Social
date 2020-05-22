@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 
 const styles = {
     pagination: {
-        display: 'flex', 
-        justifyContent: 'center', 
+        display: 'flex',
+        justifyContent: 'center',
         marginBottom: 20
     }
 }
@@ -19,19 +19,19 @@ export class Paginations extends Component {
     }
     render() {
         const { classes, numberScreams, postPerPage, defaultPage } = this.props;
-        const count = Math.ceil(numberScreams/postPerPage);
-        return (
+        const count = Math.ceil(numberScreams / postPerPage);
+        return (count > 0 && (
             <div className={classes.pagination}>
-                <Pagination count={count} defaultPage={defaultPage} variant="outlined" shape="rounded" onChange={(event, number) => this.handleChange(event, number)}/>
+                <Pagination count={count} defaultPage={defaultPage} variant="outlined" shape="rounded" onChange={(event, number) => this.handleChange(event, number)} />
             </div>
-        )
+        ))
     }
 }
 
 Paginations.propTypes = {
-    classes: PropTypes.object.isRequired, 
-    postPerPage: PropTypes.number.isRequired, 
-    changePagination: PropTypes.func.isRequired, 
+    classes: PropTypes.object.isRequired,
+    postPerPage: PropTypes.number.isRequired,
+    changePagination: PropTypes.func.isRequired,
     defaultPage: PropTypes.number.isRequired
 }
 

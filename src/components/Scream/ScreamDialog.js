@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import { getOneScream, clearErrors, clearScream } from '../../redux/actions/dataActions';
+import { getOneScream, clearScream } from '../../redux/actions/dataActions';
+import { clearError } from '../../redux/actions/uiActions';
 import { Tooltip, IconButton, Dialog, DialogContent, CircularProgress, Grid, Typography } from '@material-ui/core';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import CloseIcon from '@material-ui/icons/Close';
@@ -16,8 +17,8 @@ import CommentForm from './CommentForm';
 
 const styles = {
     profileImage: {
-        width: 170, 
-        height: 170, 
+        width: 170,
+        height: 170,
         borderRadius: '50%'
     },
     closeButton: {
@@ -41,7 +42,7 @@ const styles = {
     },
     progressBlock: {
         textAlign: 'center'
-    }, 
+    },
     body: {
         fontSize: '1.3rem'
     }
@@ -51,31 +52,31 @@ export class ScreamDialog extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            open: false, 
-            oldPath: '', 
+            open: false,
+            oldPath: '',
             newPath: ''
         }
     }
 
-    
+
     componentDidMount() {
-        if(this.props.openDialog) {
+        if (this.props.openDialog) {
             this.handleOpen()
         }
     }
-    
+
 
     handleOpen = () => {
-        let oldPath= window.location.pathname;
-        const {screamId, userHandle} = this.props;
+        let oldPath = window.location.pathname;
+        const { screamId, userHandle } = this.props;
         const newPath = `/user/${userHandle}/scream/${screamId}`;
 
-        if(oldPath === newPath) oldPath=`/user/${userHandle}`;
+        if (oldPath === newPath) oldPath = `/user/${userHandle}`;
         window.history.pushState(null, null, newPath);
-        
+
         this.setState({
-            open: true, 
-            oldPath, 
+            open: true,
+            oldPath,
             newPath
         })
         this.props.onGetOneScream(this.props.screamId)
@@ -146,7 +147,7 @@ export class ScreamDialog extends Component {
                         </Tooltip>
                         <span>{commentCount} comments</span>
                     </Grid>
-                    <CommentForm screamId={screamId}/>
+                    <CommentForm screamId={screamId} />
                     <CommentScream comments={comments} />
                 </Grid>
             )
@@ -179,9 +180,9 @@ export class ScreamDialog extends Component {
 ScreamDialog.propTypes = {
     screamId: PropTypes.string.isRequired,
     scream: PropTypes.object.isRequired,
-    ui: PropTypes.object.isRequired, 
-    onGetOneScream: PropTypes.func.isRequired, 
-    onClearErrors: PropTypes.func.isRequired, 
+    ui: PropTypes.object.isRequired,
+    onGetOneScream: PropTypes.func.isRequired,
+    onClearErrors: PropTypes.func.isRequired,
     onClearScream: PropTypes.func.isRequired
 }
 
@@ -195,8 +196,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetOneScream: (screamId) => dispatch(getOneScream(screamId)), 
-        onClearErrors: () => dispatch(clearErrors()), 
+        onGetOneScream: (screamId) => dispatch(getOneScream(screamId)),
+        onClearErrors: () => dispatch(clearError()),
         onClearScream: () => dispatch(clearScream())
     }
 }

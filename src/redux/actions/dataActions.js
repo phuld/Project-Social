@@ -1,32 +1,29 @@
 import {
-    GET_SCREAMS,
     LIKE_SCREAM,
     UNLIKE_SCREAM,
     LOADING_DATA,
     DELETE_SCREAM,
     POST_SCREAM,
-    SET_ERROR,
-    LOADING_UI,
-    CLEAR_ERROR,
-    GET_SCREAM,
-    STOP_LOADING_UI,
     SUBMIT_COMMENT,
-    SET_MESSAGE,
-    CLEAR_MESSAGE,
     EDIT_SCREAM,
     GET_NUMBER_SCREAMS,
-    GET_SCREAMS_BY_PAGE, 
+    GET_SCREAMS_BY_PAGE_START, 
+    GET_SCREAMS_BY_PAGE_SUCCESS,
     CLEAR_SCREAM, 
-    CHANGE_TYPE
+    CHANGE_TYPE,
+    GET_SCREAM_START,
+    GET_SCREAM_SUCCESS,
+    LIKE_SCREAM_SUCCESS,
+    UNLIKE_SCREAM_SUCCESS,
+    DELETE_SCREAM_SUCCESS, 
+    POST_SCREAM_SUCCESS,
+    SUBMIT_COMMENT_SUCCESS,
+    GET_SCREAMS_BY_USER,
+    GET_NUMBER_SCREAMS_BY_USER,
+    GET_NUMBER_SCREAMS_BY_USER_SUCCESS,
+    EDIT_SCREAM_SUCCESS,
+    GET_NUMBER_SCREAMS_SUCCESS
 } from '../types';
-import axios from 'axios';
-import * as messages from '../messages';
-
-export const clearMessage = () => {
-    return {
-        type: CLEAR_MESSAGE
-    }
-}
 
 //Loading data
 export const loadingData = () => {
@@ -35,249 +32,139 @@ export const loadingData = () => {
     }
 }
 
-//Get All Screams
-export const getScreams = () => {
-    return dispatch => {
-        dispatch(loadingData())
-        axios.get('/screams')
-            .then(response => {
-                dispatch({
-                    type: GET_SCREAMS,
-                    payload: response.data
-                })
-            })
-            .catch(error => {
-                dispatch({
-                    type: GET_SCREAMS,
-                    payload: []
-                })
-            })
+export const getScreamsbyPage = (currentType, currentNumber) => {
+    return {
+        type: GET_SCREAMS_BY_PAGE_START, 
+        currentType, 
+        currentNumber
+    }
+}
+
+export const getScreamsbyPageSuccess = (payload, sortBy, currentPage) => {
+    return {
+        type: GET_SCREAMS_BY_PAGE_SUCCESS, 
+        payload, 
+        sortBy, 
+        currentPage
     }
 }
 
 //Get One Scream
 export const getOneScream = (screamId) => {
-    return dispatch => {
-        dispatch({
-            type: LOADING_UI
-        })
-        axios.get(`/scream/${screamId}`)
-            .then((response) => {
-                dispatch({
-                    type: GET_SCREAM,
-                    payload: response.data
-                })
-                dispatch({
-                    type: STOP_LOADING_UI
-                })
-            })
+    return {
+        type: GET_SCREAM_START, 
+        screamId
+    }
+}
+
+export const getScreamSuccess = (screamData) => {
+    return {
+        type: GET_SCREAM_SUCCESS, 
+        payload: screamData
     }
 }
 
 //Like Scream
 export const likeScream = (screamId) => {
-    return dispatch => {
-        axios.get(`/scream/${screamId}/like`)
-            .then(response => {
-                dispatch({
-                    type: LIKE_SCREAM,
-                    payload: response.data
-                })
-                dispatch({
-                    type: SET_MESSAGE,
-                    payload: messages.MESSAGE_LIKE_SCREAM
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
+    return {
+        type: LIKE_SCREAM, 
+        screamId
+    }
+}
+
+export const likeScreamSuccess = (screamData) => {
+    return {
+        type: LIKE_SCREAM_SUCCESS, 
+        payload: screamData
     }
 }
 
 //Unlike Scream
 export const unlikeScream = (screamId) => {
-    return dispatch => {
-        axios.get(`/scream/${screamId}/unlike`)
-            .then(response => {
-                dispatch({
-                    type: UNLIKE_SCREAM,
-                    payload: response.data
-                })
-                dispatch({
-                    type: SET_MESSAGE,
-                    payload: messages.MESSAGE_UNLIKE_SCREAM
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
+    return {
+        type: UNLIKE_SCREAM, 
+        screamId
+    }
+}
+
+export const unlikeScreamSuccess = (screamData) => {
+    return {
+        type: UNLIKE_SCREAM_SUCCESS, 
+        payload: screamData
     }
 }
 
 //Delete Scream
 export const deleteScream = (screamId) => {
-    return dispatch => {
-        axios.delete(`/scream/${screamId}`)
-            .then((response) => {
-                dispatch({
-                    type: DELETE_SCREAM,
-                    payload: screamId
-                })
-                dispatch({
-                    type: SET_MESSAGE,
-                    payload: messages.MESSAGE_DELETE_SCREAM
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
+    return {
+        type: DELETE_SCREAM, 
+        screamId
+    }
+}
+
+export const deleteScreamSuccess = (screamId) => {
+    return {
+        type: DELETE_SCREAM_SUCCESS, 
+        payload: screamId
     }
 }
 
 //Post Scream
 export const postScream = (newScream) => {
-    return dispatch => {
-        dispatch({
-            type: LOADING_UI
-        })
-        axios.post('/scream', newScream)
-            .then(response => {
-                dispatch({
-                    type: POST_SCREAM,
-                    payload: response.data
-                })
-                dispatch({
-                    type: CLEAR_ERROR
-                })
-                dispatch({
-                    type: SET_MESSAGE, 
-                    payload: messages.MESSAGE_CREATE_SCREAM
-                })
-            })
-            .catch(error => {
-                dispatch({
-                    type: SET_ERROR,
-                    payload: error.response.data
-                })
-            })
+    return {
+        type: POST_SCREAM, 
+        newScream
     }
 }
 
-export const clearErrors = () => {
-    return dispatch => {
-        dispatch({
-            type: CLEAR_ERROR
-        })
+export const postScreamSuccess = (screamData) => {
+    return {
+        type: POST_SCREAM_SUCCESS, 
+        payload: screamData
     }
 }
 
 export const submitComment = (screamId, commentData) => {
-    return dispatch => {
-        dispatch({
-            type: LOADING_UI
-        })
-        axios.post(`/scream/${screamId}/comment`, commentData)
-            .then(response => {
-                dispatch({
-                    type: SUBMIT_COMMENT,
-                    payload: response.data
-                })
-                dispatch({
-                    type: STOP_LOADING_UI
-                })
-                dispatch({
-                    type: SET_MESSAGE, 
-                    payload: messages.MESSAGE_COMMENT_SCREAM
-                })
-            })
-            .catch(error => {
-                dispatch({
-                    type: SET_ERROR,
-                    payload: error.response.data
-                })
-            })
+    return {
+        type: SUBMIT_COMMENT, 
+        screamId, 
+        commentData
     }
 }
 
-export const getScreamsByUser = (userHandle) => {
-    return dispatch => {
-        dispatch({
-            type: LOADING_DATA
-        })
-        axios.get(`/user/${userHandle}`)
-            .then(response => {
-                dispatch({
-                    type: GET_SCREAMS,
-                    payload: response.data.screams
-                })
-            })
-            .catch(error => {
-                dispatch({
-                    type: SET_ERROR,
-                    payload: []
-                })
-            })
+export const submitCommentSuccess = (commentData) => {
+    return {
+        type: SUBMIT_COMMENT_SUCCESS, 
+        payload: commentData
     }
 }
+
 
 export const editScream = (screamId, screamData) => {
-    return dispatch => {
-        dispatch({
-            type: LOADING_UI
-        })
-        axios.post(`/scream/${screamId}/edit`, screamData)
-            .then(response => {
-                dispatch({
-                    type: EDIT_SCREAM,
-                    payload: response.data
-                })
-                dispatch({
-                    type: STOP_LOADING_UI
-                })
-                dispatch({
-                    type: SET_MESSAGE,
-                    payload: messages.MESSAGE_EDIT_SCREAM
-                })
-            })
-            .catch(error => {
-                dispatch({
-                    type: SET_ERROR,
-                    payload: error.response.data
-                })
-            })
+    return {
+        type: EDIT_SCREAM, 
+        screamId, 
+        screamData
+    }
+}
+
+export const editScreamSuccess = (screamData) => {
+    return {
+        type: EDIT_SCREAM_SUCCESS, 
+        payload: screamData
     }
 }
 
 export const getNumberScreams = () => {
-    return dispatch => {
-        axios.get('/number-screams')
-            .then(response => {
-                dispatch({
-                    type: GET_NUMBER_SCREAMS,
-                    payload: response.data.number
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
+    return {
+        type: GET_NUMBER_SCREAMS
     }
 }
 
-export const getScreamsbyPage = (type, number) => {
-    return dispatch => {
-        dispatch(loadingData())
-        axios.get(`/screams/${type}/page/${number}`)
-            .then(response => {
-                dispatch({
-                    type: GET_SCREAMS_BY_PAGE, 
-                    payload: response.data, 
-                    sortBy: type, 
-                    currentPage: number
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            })
+export const getNumberScreamsSuccess = (number) => {
+    return {
+        type: GET_NUMBER_SCREAMS_SUCCESS, 
+        payload: number
     }
 }
 
@@ -291,5 +178,28 @@ export const changeType = (type) => {
     return {
         type: CHANGE_TYPE, 
         payload: type
+    }
+}
+
+export const getScreamsByUser = (userHandle, currentType, currentPage) => {
+    return {
+        type: GET_SCREAMS_BY_USER, 
+        userHandle, 
+        currentType, 
+        currentPage
+    }
+}
+
+export const getNumberScreamsByUser = (userHandle) => {
+    return {
+        type: GET_NUMBER_SCREAMS_BY_USER, 
+        userHandle
+    }
+}
+
+export const getNumberScreamsByUserSuccess = (number) => {
+    return {
+        type: GET_NUMBER_SCREAMS_BY_USER_SUCCESS, 
+        payload: number
     }
 }

@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import { postScream, clearErrors, getScreamsbyPage } from '../../redux/actions/dataActions';
+import { postScream, getScreamsbyPage } from '../../redux/actions/dataActions';
+import { clearError } from '../../redux/actions/uiActions';
 import { Tooltip, IconButton, Dialog, DialogContent, TextField, Button, CircularProgress } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -172,7 +173,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onPostScream: (newScream) => dispatch(postScream(newScream)),
-        onClearErrors: () => dispatch(clearErrors()), 
+        onClearErrors: () => dispatch(clearError()),
         onGetScreamsbyPage: (numberPage) => dispatch(getScreamsbyPage(numberPage))
     }
 }

@@ -33,10 +33,11 @@ export const setUserData = (userData) => {
     }
 }
 
-export const loginUser = (userData) => {
+export const loginUser = (userData, history) => {
     return {
         type: LOGIN_USER, 
-        userData
+        userData, 
+        history
     }
 }
 

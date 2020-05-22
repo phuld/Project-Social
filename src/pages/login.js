@@ -29,11 +29,11 @@ class login extends Component {
         this.props.onClearErrors()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.user.authenticated === true) {
-            this.props.history.push('/newest')
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.props.user.authenticated === true) {
+    //         this.props.history.push('/newest')
+    //     }
+    // }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -41,7 +41,7 @@ class login extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        this.props.loginUser(userData);
+        this.props.loginUser(userData, this.props.history);
         this.props.onChangeType('newest');
     }
 
@@ -102,7 +102,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginUser: (userData) => dispatch(loginUser(userData)),
+        loginUser: (userData, history) => dispatch(loginUser(userData, history)),
         onClearErrors: () => dispatch(clearError()),
         onChangeType: (type) => dispatch(changeType(type))
     }
