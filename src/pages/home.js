@@ -37,7 +37,7 @@ export class home extends Component {
                 pageNumber = +key[1];
             }
         }
-        if ( (prevProps.type !== this.props.type) || (prevProps.user.credentials.imageUrl && prevProps.user.credentials.imageUrl !== this.props.user.credentials.imageUrl)) {
+        if ((prevProps.type !== this.props.type) || (prevProps.user.credentials.imageUrl && prevProps.user.credentials.imageUrl !== this.props.user.credentials.imageUrl)) {
             this.props.onChangeType(currentUrl);
             this.props.onGetScreamsbyPages(this.props.type, 1);
             this.setState({
@@ -59,13 +59,16 @@ export class home extends Component {
     }
 
     render() {
-        const { screams, loading, currentPage } = this.props;
-        // const { currentPage, postPerPage } = this.state;
-        const displayScream = !loading ?
-            (screams.map(scream => (
-                <Scream scream={scream} key={scream.screamId} />
-            ))) : <ScreamSkeletons />;
-        const displayPagination = !loading ? (
+        const { screams, loadingData, currentPage, loadingUser, user: { blocks } } = this.props;
+        const displayScream = (!loadingData && !loadingUser) ?
+            (screams.map(scream => {
+                if (blocks.findIndex(block => block.screamId === scream.screamId) === -1) {
+                    return (
+                        <Scream scream={scream} key={scream.screamId} />
+                    )
+                }else return null;
+            })) : <ScreamSkeletons />;
+        const displayPagination = (!loadingData && !loadingUser) ? (
             <Paginations defaultPage={currentPage} postPerPage={10} changePagination={this.changePagination} />
         ) : null;
         return (
@@ -93,18 +96,19 @@ home.propTypes = {
 const mapStateToProps = state => {
     return {
         screams: state.data.screams,
-        loading: state.data.loading,
+        loadingData: state.data.loading,
         user: state.user,
         scream: state.data.scream,
         type: state.data.type,
-        currentPage: state.data.currentPage
+        currentPage: state.data.currentPage,
+        loadingUser: state.user.loading
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onGetScreamsbyPages: (type, numberPage) => dispatch(getScreamsbyPage(type, numberPage)),
-        onGetNumberScreams: () => dispatch(getNumberScreams()), 
+        onGetNumberScreams: () => dispatch(getNumberScreams()),
         onChangeType: (type) => dispatch(changeType(type))
     }
 }

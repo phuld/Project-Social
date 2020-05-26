@@ -22,7 +22,9 @@ import {
     GET_NUMBER_SCREAMS_BY_USER,
     GET_NUMBER_SCREAMS_BY_USER_SUCCESS,
     EDIT_SCREAM_SUCCESS,
-    GET_NUMBER_SCREAMS_SUCCESS
+    GET_NUMBER_SCREAMS_SUCCESS, 
+    BLOCK_SCREAM, 
+    BLOCK_SCREAM_SUCCESS
 } from '../types';
 
 //Loading data
@@ -201,5 +203,19 @@ export const getNumberScreamsByUserSuccess = (number) => {
     return {
         type: GET_NUMBER_SCREAMS_BY_USER_SUCCESS, 
         payload: number
+    }
+}
+
+export const blockScream = (screamId) => {
+    return {
+        type: BLOCK_SCREAM, 
+        screamId
+    }    
+}
+
+export const blockScreamSuccess = (blockData) => {
+    return {
+        type: BLOCK_SCREAM_SUCCESS, 
+        payload: blockData
     }
 }

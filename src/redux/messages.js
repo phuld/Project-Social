@@ -6,3 +6,4 @@ export const MESSAGE_COMMENT_SCREAM = "Comment tweet successfully";
 export const MESSAGE_EDIT_SCREAM = "Tweet edited successfully";
 export const MESSAGE_CHANGE_AVATAR = "Avatar changed successfully";
 export const MESSAGE_UPDATE_USER = 'Profile updated successfully';
+export const MESSAGE_BLOCK_SCREAM = "This tweet doesn't show on your page"; 

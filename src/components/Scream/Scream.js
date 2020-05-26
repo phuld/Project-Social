@@ -95,7 +95,7 @@ export class Scream extends Component {
                             <ExpandMoreIcon color="primary"/>
                         </IconButton>
                     </Tooltip> */}  
-                    {user.credentials && userHandle === user.credentials.handle && <ActionScream screamId={screamId} userHandle={userHandle} scream={scream}/>}
+                    {user.authenticated && <ActionScream screamId={screamId} userHandle={userHandle} scream={scream}/>}
                 </CardContent>
             </Card>
         )

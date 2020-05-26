@@ -11,7 +11,8 @@ import {
     submitCommentSuccess,
     getNumberScreamsByUserSuccess,
     editScreamSuccess,
-    getNumberScreamsSuccess
+    getNumberScreamsSuccess,
+    blockScreamSuccess
 } from '../actions/dataActions'
 import {
     loadingUI,
@@ -26,7 +27,8 @@ import {
     MESSAGE_DELETE_SCREAM,
     MESSAGE_CREATE_SCREAM,
     MESSAGE_COMMENT_SCREAM,
-    MESSAGE_EDIT_SCREAM
+    MESSAGE_EDIT_SCREAM,
+    MESSAGE_BLOCK_SCREAM
 } from '../messages';
 
 export function* getScreamsByPageSaga(action) {
@@ -139,6 +141,16 @@ export function* getNumberScreamsSaga(action) {
     try {
         const response = yield axios.get('/number-screams');
         yield put(getNumberScreamsSuccess(response.data.number))
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* blockScreamSaga(action) {
+    try {
+        const response = yield axios.get(`/scream/${action.screamId}/block`);
+        yield put(blockScreamSuccess(response.data));
+        yield put(setMessage(MESSAGE_BLOCK_SCREAM));
     } catch (error) {
         console.log(error);
     }

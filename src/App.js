@@ -14,8 +14,11 @@ import Navbar from './components/Layout/Navbar';
 import AuthRoute from './utils/AuthRoute';
 import user from './pages/user';
 import Message from './components/UI/Message';
+import axios from 'axios';
 
 const theme = createMuiTheme(themeFile)
+
+axios.defaults.baseURL= "https://us-central1-socialapp-4f684.cloudfunctions.net/api";
 
 class App extends Component {
     componentDidMount() {

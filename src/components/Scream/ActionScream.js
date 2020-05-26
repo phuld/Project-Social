@@ -6,6 +6,7 @@ import { Menu, MenuItem, IconButton } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteScream from './DeleteScream';
 import EditScream from './EditScream';
+import BlockScream from './BlockScream';
 
 const styles = {
     expandIcon: {
@@ -71,7 +72,13 @@ export class ActionScream extends Component {
                     <DeleteScream screamId={screamId} />
                 </MenuItem>
             </div>
-        ) : null : null;
+        ) : (
+            <div>
+                <MenuItem onClick={this.handleClose} className={classes.menuItem}>
+                    <BlockScream screamId={screamId}/>
+                </MenuItem>
+            </div>
+        ) : null;
         return (
             <div className={classes.actionScream}>
                 <IconButton
@@ -111,7 +118,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        
     }
 }
 

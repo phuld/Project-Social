@@ -5,7 +5,8 @@ const initialState = {
     loading: false,
     credentials: {},
     likes: [],
-    notifications: []
+    notifications: [], 
+    blocks: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +51,14 @@ const reducer = (state = initialState, action) => {
             state.notifications.forEach(noti => noti.read = true)
             return {
                 ...state
+            }
+        case actionTypes.BLOCK_SCREAM_SUCCESS: 
+            return {
+                ...state, 
+                blocks: [
+                    action.payload, 
+                    ...state.blocks
+                ]
             }
         default:
             return state;
