@@ -20,7 +20,9 @@ import {
     GET_NUMBER_SCREAMS_BY_USER,
     EDIT_SCREAM,
     GET_NUMBER_SCREAMS,
-    BLOCK_SCREAM
+    BLOCK_SCREAM,
+    FOLLOW_USER,
+    UNFOLLOW_USER
 } from '../types';
 import { 
     loginUserSaga, 
@@ -30,7 +32,9 @@ import {
     authCheckStateSaga,
     changeImageSaga,
     editUserDetailSaga,
-    markNotificationsReadSaga
+    markNotificationsReadSaga,
+    followUserSaga,
+    unfollowUserSaga
 } from '../sagas/user';
 import { 
     getScreamsByPageSaga, 
@@ -58,6 +62,8 @@ export function* watchAuth() {
     yield takeEvery(CHANGE_AVATAR, changeImageSaga);
     yield takeEvery(EDIT_USER, editUserDetailSaga);
     yield takeEvery(MARK_NOTIFICATIONS_READ, markNotificationsReadSaga);
+    yield takeEvery(FOLLOW_USER, followUserSaga);
+    yield takeEvery(UNFOLLOW_USER, unfollowUserSaga);
 
     //Data Saga
     yield takeEvery(GET_SCREAMS_BY_PAGE_START, getScreamsByPageSaga);

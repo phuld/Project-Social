@@ -6,7 +6,8 @@ const initialState = {
     credentials: {},
     likes: [],
     notifications: [], 
-    blocks: []
+    blocks: [], 
+    follows: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -59,6 +60,21 @@ const reducer = (state = initialState, action) => {
                     action.payload, 
                     ...state.blocks
                 ]
+            }
+        case actionTypes.FOLLOW_USER_SUCCESS:
+            return {
+                ...state, 
+                loading: false,
+                follows: [
+                    action.payload, 
+                    ...state.follows
+                ]
+            }
+        case actionTypes.UNFOLLOW_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                follows: state.follows.filter(follow => follow.owner !== action.payload)
             }
         default:
             return state;

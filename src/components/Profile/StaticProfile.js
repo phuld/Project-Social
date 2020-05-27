@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { getOtherUser } from '../../redux/actions/otherUserReducers';
 import { withRouter } from 'react-router-dom';
 import ProfileSkeletons from '../../utils/ProfileSkeletons';
+import FollowUser from './FollowUser';
 
 const styles = {
     profile: {
@@ -74,24 +75,29 @@ export class StaticProfile extends Component {
         this.props.onGetOtherUser(this.props.match.params.userHandle)
     }
 
+    followUser = () => {
+        alert('tada');
+    }
+
     render() {
         const {
             classes,
             data: {
-                imageUrl, 
-                createdAt, 
-                bio, 
-                website, 
-                location, 
+                imageUrl,
+                createdAt,
+                bio,
+                website,
+                location,
                 handle
-            }, 
+            },
             loading
         } = this.props;
         let otherUserMarkup = !loading ? (
             <Paper>
                 <div className={classes.profile}>
                     <div className={classes.blockImage}>
-                        {/* <img src={imageUrl} alt="" className={classes.profileImage} /> */}
+                        {/* <img src={imageUrl} alt="" className={cclasses.profileImage} /> */}
+                        <FollowUser userHandle={handle}/>
                         <Avatar alt="avatar" src={imageUrl} className={classes.profileImage} />
                         <input
                             type="file"
@@ -120,7 +126,7 @@ export class StaticProfile extends Component {
                     </div>
                 </div>
             </Paper>
-        ) : <ProfileSkeletons/>
+        ) : <ProfileSkeletons />
 
         return otherUserMarkup;
 
@@ -134,7 +140,7 @@ StaticProfile.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        data: state.otherUser.data, 
+        data: state.otherUser.data,
         loading: state.otherUser.loading
     }
 }

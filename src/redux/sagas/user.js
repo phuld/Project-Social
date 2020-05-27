@@ -8,7 +8,9 @@ import {
     setUnauthenticated,
     logoutUser,
     setAuthenticated,
-    markNotiReadSuccess
+    markNotiReadSuccess,
+    followUserSuccess,
+    unfollowUserSuccess
 } from '../actions/userActions';
 import {
     loadingUI,
@@ -17,8 +19,10 @@ import {
     setMessage
 } from '../actions/uiActions';
 import {
-    MESSAGE_CHANGE_AVATAR, 
-    MESSAGE_UPDATE_USER
+    MESSAGE_CHANGE_AVATAR,
+    MESSAGE_UPDATE_USER,
+    MESSAGE_FOLLOW_USER,
+    MESSAGE_UNFOLLOW_USER
 } from '../messages';
 
 export function* loginUserSaga(action) {
@@ -31,7 +35,7 @@ export function* loginUserSaga(action) {
         axios.defaults.headers.common['Authorization'] = authToken;
         yield put(getUserData());
         yield put(clearError());
-        
+
     } catch (error) {
         yield put(setError(error.response.data));
     }
@@ -110,5 +114,27 @@ export function* markNotificationsReadSaga(action) {
         yield put(markNotiReadSuccess());
     } catch (error) {
         console.log(error);
+    }
+}
+
+export function* followUserSaga(action) {
+    yield put(loadingUser());
+    try {
+        const response = yield axios.get(`/user/${action.userHandle}/follow`);
+        yield put(followUserSuccess(response.data))
+        yield put(setMessage(MESSAGE_FOLLOW_USER))
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* unfollowUserSaga(action) {
+    yield put(loadingUser())
+    try {
+        yield axios.get(`/user/${action.userHandle}/unfollow`);
+        yield put(unfollowUserSuccess(action.userHandle))
+        yield put(setMessage(MESSAGE_UNFOLLOW_USER))
+    } catch (error) {
+        console.log(error)
     }
 }

@@ -12,6 +12,11 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const AUTH_CHECK_STATE = 'AUTH_CHECK_STATE';
 export const CHANGE_AVATAR = 'CHANGE_AVATAR';
 export const EDIT_USER = 'EDIT_USER';
+export const FOLLOW_USER = 'FOLLOW_USER';
+export const FOLLOW_USER_SUCCESS = 'FOLLOW_USER_SUCCESS';
+export const UNFOLLOW_USER = 'UNFOLLOW_USER';
+export const UNFOLLOW_USER_SUCCESS = 'UNFOLLOW_USER_SUCCESS';
+
 
 //UI Reducers
 export const SET_ERROR = 'SET_ERROR';

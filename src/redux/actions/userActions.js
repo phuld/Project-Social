@@ -11,7 +11,11 @@ import {
     AUTH_CHECK_STATE,
     CHANGE_AVATAR,
     EDIT_USER, 
-    MARK_NOTIFICATIONS_READ_SUCCESS
+    MARK_NOTIFICATIONS_READ_SUCCESS,
+    FOLLOW_USER,
+    FOLLOW_USER_SUCCESS,
+    UNFOLLOW_USER,
+    UNFOLLOW_USER_SUCCESS
 } from '../types';
 
 export const loadingUser = () => {
@@ -96,5 +100,33 @@ export const markNotificationsRead = (notificationIds) => {
 export const markNotiReadSuccess = () => {
     return {
         type: MARK_NOTIFICATIONS_READ_SUCCESS
+    }
+}
+
+export const followUser = (userHandle) => {
+    return {
+        type: FOLLOW_USER, 
+        userHandle
+    }
+}
+
+export const followUserSuccess = (followData) => {
+    return {
+        type: FOLLOW_USER_SUCCESS, 
+        payload: followData
+    }
+}
+
+export const unfollowUser = (userHandle) => {
+    return {
+        type: UNFOLLOW_USER, 
+        userHandle
+    }
+}
+
+export const unfollowUserSuccess = (userHandle) => {
+    return {
+        type: UNFOLLOW_USER_SUCCESS, 
+        payload: userHandle
     }
 }
