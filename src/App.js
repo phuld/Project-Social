@@ -15,6 +15,7 @@ import AuthRoute from './utils/AuthRoute';
 import user from './pages/user';
 import Message from './components/UI/Message';
 import axios from 'axios';
+import following from './pages/following';
 
 const theme = createMuiTheme(themeFile)
 
@@ -38,8 +39,10 @@ class App extends Component {
                             <Route exact path="/most-likes" component={home} />
                             <AuthRoute exact path="/login" component={login} authenticated={authenticated} />
                             <AuthRoute exact path="/signup" component={signup} authenticated={authenticated} />
+                            <Route exact path="/following" component={following} authenticated={authenticated} />
                             <Route exact path="/user/:userHandle" component={user}/>
                             <Route exact path="/user/:userHandle/scream/:screamId" component={user}/>
+                            <Route exact path="/following/user/:userHandle/scream/:screamId" component={following}/>
                             <Route exact path="/" render={() => <Redirect to="/newest"/>} />
                         </Switch>
                     </div>

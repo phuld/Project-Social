@@ -24,7 +24,9 @@ import {
     EDIT_SCREAM_SUCCESS,
     GET_NUMBER_SCREAMS_SUCCESS, 
     BLOCK_SCREAM, 
-    BLOCK_SCREAM_SUCCESS
+    BLOCK_SCREAM_SUCCESS,
+    GET_SCREAMS_BY_FOLLOWING,
+    GET_SCREAMS_BY_FOLLOWING_SUCCESS
 } from '../types';
 
 //Loading data
@@ -217,5 +219,18 @@ export const blockScreamSuccess = (blockData) => {
     return {
         type: BLOCK_SCREAM_SUCCESS, 
         payload: blockData
+    }
+}
+
+export const getScreamsByFollowing = () => {
+    return {
+        type: GET_SCREAMS_BY_FOLLOWING
+    }
+}
+
+export const getScreamsByFollowingSuccess = (screams) => {
+    return {
+        type: GET_SCREAMS_BY_FOLLOWING_SUCCESS, 
+        payload: screams
     }
 }

@@ -68,12 +68,14 @@ export class ScreamDialog extends Component {
 
     handleOpen = () => {
         let oldPath = window.location.pathname;
+        console.log(oldPath);
         const { screamId, userHandle } = this.props;
-        const newPath = `/user/${userHandle}/scream/${screamId}`;
-
+        let newPath = `/user/${userHandle}/scream/${screamId}`;
+        if(oldPath === '/following' ) {
+            newPath = `/following/user/${userHandle}/scream/${screamId}`;
+        }
         if (oldPath === newPath) oldPath = `/user/${userHandle}`;
         window.history.pushState(null, null, newPath);
-
         this.setState({
             open: true,
             oldPath,
@@ -93,6 +95,7 @@ export class ScreamDialog extends Component {
 
     render() {
         dayjs.extend(relativeTime);
+        console.log(this.state.open);
         const {
             classes,
             scream: {

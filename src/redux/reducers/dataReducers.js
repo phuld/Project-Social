@@ -12,7 +12,8 @@ import {
     SUBMIT_COMMENT_SUCCESS,
     GET_NUMBER_SCREAMS_BY_USER_SUCCESS,
     EDIT_SCREAM_SUCCESS,
-    GET_NUMBER_SCREAMS_SUCCESS
+    GET_NUMBER_SCREAMS_SUCCESS,
+    GET_SCREAMS_BY_FOLLOWING_SUCCESS
 } from '../types';
 
 const initialState = {
@@ -106,6 +107,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, 
                 number: action.payload
+            }
+        case GET_SCREAMS_BY_FOLLOWING_SUCCESS:
+            return {
+                ...state, 
+                screams: action.payload
             }
         default:
             return state;

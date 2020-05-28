@@ -27,10 +27,10 @@ export class user extends Component {
     componentDidMount() {
         const userHandle = this.props.match.params.userHandle;
         const screamId = this.props.match.params.screamId;
+        console.log(screamId);
         const queryString = new URLSearchParams(this.props.location.search);
         let currentType = 'newest';
         let currentPage = 1;
-        console.log(this.props.location.search);
         for (let key of queryString.entries()) {
             if (key[0] === "sortBy") {
                 currentType = key[1];

@@ -22,7 +22,8 @@ import {
     GET_NUMBER_SCREAMS,
     BLOCK_SCREAM,
     FOLLOW_USER,
-    UNFOLLOW_USER
+    UNFOLLOW_USER,
+    GET_SCREAMS_BY_FOLLOWING
 } from '../types';
 import { 
     loginUserSaga, 
@@ -48,7 +49,8 @@ import {
     getNumberScreamsByUserSaga,
     editScreamSaga, 
     getNumberScreamsSaga,
-    blockScreamSaga
+    blockScreamSaga,
+    getScreamsByFollowingSaga
 } from './data';
 import { getOtherUserSaga } from './otherUser';
 
@@ -78,6 +80,7 @@ export function* watchAuth() {
     yield takeEvery(EDIT_SCREAM, editScreamSaga);
     yield takeEvery(GET_NUMBER_SCREAMS, getNumberScreamsSaga);
     yield takeEvery(BLOCK_SCREAM, blockScreamSaga);
+    yield takeEvery(GET_SCREAMS_BY_FOLLOWING, getScreamsByFollowingSaga);
     //Other User Saga
     yield takeEvery(GET_OTHER_USER, getOtherUserSaga);
 }

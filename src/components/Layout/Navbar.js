@@ -12,6 +12,7 @@ import { Tooltip, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import PostScream from '../Scream/PostScream';
 import Notifications from './Notifications';
+import GroupIcon from '@material-ui/icons/Group';
 
 const styles = {
     container: {
@@ -36,6 +37,11 @@ export class Navbar extends Component {
                 {authenticated ? (
                     <Toolbar className={classes.container}>
                         <PostScream />
+                        <Tooltip title="My following post">
+                            <IconButton component={Link} to="/following">
+                                <GroupIcon className={classes.icon}/>
+                            </IconButton>
+                        </Tooltip>
                         <Tooltip title="Home">
                             <IconButton onClick={this.handleClick}>
                                 <HomeIcon color="action" className={classes.icon} />

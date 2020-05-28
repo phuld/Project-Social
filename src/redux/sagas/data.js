@@ -12,7 +12,8 @@ import {
     getNumberScreamsByUserSuccess,
     editScreamSuccess,
     getNumberScreamsSuccess,
-    blockScreamSuccess
+    blockScreamSuccess,
+    getScreamsByFollowingSuccess
 } from '../actions/dataActions'
 import {
     loadingUI,
@@ -151,6 +152,17 @@ export function* blockScreamSaga(action) {
         const response = yield axios.get(`/scream/${action.screamId}/block`);
         yield put(blockScreamSuccess(response.data));
         yield put(setMessage(MESSAGE_BLOCK_SCREAM));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* getScreamsByFollowingSaga(action) {
+    yield put(loadingUI())
+    try {
+        const response = yield axios.get('/screams/following');
+        yield put(getScreamsByFollowingSuccess(response.data));
+        yield put(clearError())
     } catch (error) {
         console.log(error);
     }

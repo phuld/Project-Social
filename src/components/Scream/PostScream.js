@@ -103,7 +103,7 @@ export class PostScream extends Component {
         const { classes, ui: { loading } } = this.props;
         return (
             <Fragment>
-                <Tooltip title="Add a new Scream">
+                <Tooltip title="Add a new tweet">
                     <IconButton onClick={this.handleOpen}>
                         <AddIcon color="secondary" className={classes.icon} />
                     </IconButton>
