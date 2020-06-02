@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Grid, } from '@material-ui/core';
+import { Grid, Typography, } from '@material-ui/core';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ScreamSkeletons from '../utils/ScreamSkeletons';
 import Scream from '../components/Scream/Scream';
 import { getScreamsByFollowing } from '../redux/actions/dataActions';
+import UserFollowing from '../components/User/UserFollowing';
 
 const styles = {
 
@@ -40,6 +41,8 @@ export class following extends Component {
                     </Grid>
                     <Grid item xs={4}>
                         {/* <p>Profile</p> */}
+                        <Typography variant="h6"><strong>My following user</strong></Typography>
+                        <UserFollowing/>
                     </Grid>
                 </Grid>
             </div>

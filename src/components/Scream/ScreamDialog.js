@@ -95,7 +95,6 @@ export class ScreamDialog extends Component {
 
     render() {
         dayjs.extend(relativeTime);
-        console.log(this.state.open);
         const {
             classes,
             scream: {
