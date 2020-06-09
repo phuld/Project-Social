@@ -7,12 +7,18 @@ import { changeType } from '../redux/actions/dataActions';
 import PropTypes from 'prop-types';
 import IconImage from '../assets/images/logo.jpeg';
 import Grid from '@material-ui/core/Grid';
-import { Typography, TextField, Button, CircularProgress } from '@material-ui/core';
+import { Typography, TextField, Button, CircularProgress, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 
 const styles = (theme) => ({
-    ...theme.spread
+    ...theme.spread, 
+    block: {
+        margin: 'auto'
+    }, 
+    card: {
+        padding: '1.5rem'
+    }
 })
 
 class login extends Component {
@@ -55,30 +61,30 @@ class login extends Component {
         const { classes, ui: { loading, errors } } = this.props;
         return (
             <Grid container className={classes.form} spacing={3}>
-                <Grid item sm />
-                <Grid item sm>
-                    <img src={IconImage} alt="Logo" className={classes.image} />
-                    <Typography variant="h5" className={classes.title}>Login</Typography>
-                    <Typography variant="body2" className={classes.title}>Get started with our service</Typography>
-                    <form noValidate onSubmit={this.handleSubmit} method="POST">
-                        <TextField id="email" name="email" type="email" label="Email" className={classes.textField}
-                            value={this.state.email} onChange={this.handleChange} fullWidth
-                            error={errors.email ? true : false}
-                            helperText={errors.email} />
-                        <TextField id="password" name="password" type="password" label="Password" className={classes.textField}
-                            value={this.state.password} onChange={this.handleChange} fullWidth
-                            error={errors.password ? true : false}
-                            helperText={errors.password} />
-                        {errors.general && <Typography variant="body2" className={classes.errorLogin}>{errors.general}</Typography>}
-                        <Button type="submit" variant="contained" color="primary" className={classes.button}
-                            disabled={loading}>
-                            Login
+                <Grid item sm={6} className={classes.block}>
+                    <Card className={classes.card}>
+                        <img src={IconImage} alt="Logo" className={classes.image} />
+                        <Typography variant="h5" className={classes.title}>Login</Typography>
+                        <Typography variant="body2" className={classes.title}>Get started with our service</Typography>
+                        <form noValidate onSubmit={this.handleSubmit} method="POST">
+                            <TextField id="email" name="email" type="email" label="Email" className={classes.textField}
+                                value={this.state.email} onChange={this.handleChange} fullWidth
+                                error={errors.email ? true : false}
+                                helperText={errors.email} />
+                            <TextField id="password" name="password" type="password" label="Password" className={classes.textField}
+                                value={this.state.password} onChange={this.handleChange} fullWidth
+                                error={errors.password ? true : false}
+                                helperText={errors.password} />
+                            {errors.general && <Typography variant="body2" className={classes.errorLogin}>{errors.general}</Typography>}
+                            <Button type="submit" variant="contained" color="primary" className={classes.button}
+                                disabled={loading}>
+                                Login
                             {loading && <CircularProgress color="secondary" className={classes.progress} />}
-                        </Button><br />
-                        <small>Don't have an account ? Sign up <strong><Link to="/signup">here</Link></strong></small>
-                    </form>
+                            </Button><br />
+                            <small>Don't have an account ? Sign up <strong><Link to="/signup">here</Link></strong></small>
+                        </form>
+                    </Card>
                 </Grid>
-                <Grid item sm />
             </Grid>
         )
     }

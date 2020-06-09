@@ -6,11 +6,18 @@ import { clearError } from '../redux/actions/uiActions';
 import PropTypes from 'prop-types';
 import IconImage from '../assets/images/logo.jpeg';
 import Grid from '@material-ui/core/Grid';
-import { Typography, TextField, Button, CircularProgress } from '@material-ui/core';
+import { Typography, TextField, Button, CircularProgress, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const styles = (theme) => ({
-    ...theme.spread
+    ...theme.spread, 
+    card: {
+        padding: '1.5rem', 
+        margin: 'auto'
+    }, 
+    block: {
+        margin: 'auto'
+    }
 })
 
 class signup extends Component {
@@ -53,37 +60,37 @@ class signup extends Component {
         const { classes, ui: { loading, errors } } = this.props;
         return (
             <Grid container className={classes.form}>
-                <Grid item sm />
-                <Grid item sm>
-                    <img src={IconImage} alt="Logo" className={classes.image} />
-                    <Typography variant="h5" className={classes.title}>Signup</Typography>
-                    <form noValidate onSubmit={this.handleSubmit} method="POST">
-                        <TextField id="email" name="email" type="email" label="Email" className={classes.textField}
-                            value={this.state.email} onChange={this.handleChange} fullWidth
-                            error={errors.email ? true : false}
-                            helperText={errors.email} />
-                        <TextField id="password" name="password" type="password" label="Password" className={classes.textField}
-                            value={this.state.password} onChange={this.handleChange} fullWidth
-                            error={errors.password ? true : false}
-                            helperText={errors.password} />
-                        <TextField id="confirmPassword" name="confirmPassword" type="password" label="Confirm Password" className={classes.textField}
-                            value={this.state.confirmPassword} onChange={this.handleChange} fullWidth
-                            error={errors.confirmPassword ? true : false}
-                            helperText={errors.confirmPassword} />
-                        <TextField id="handle" name="handle" type="text" label="Handle" className={classes.textField}
-                            value={this.state.handle} onChange={this.handleChange} fullWidth
-                            error={errors.handle ? true : false}
-                            helperText={errors.handle} />
-                        {errors.general && <Typography variant="body2" className={classes.errorLogin}>{errors.general}</Typography>}
-                        <Button type="submit" variant="contained" color="primary" className={classes.button}
-                            disabled={loading}>
-                            Signup
+                <Grid item sm={6} className={classes.block}>
+                    <Card className={classes.card}>
+                        <img src={IconImage} alt="Logo" className={classes.image} />
+                        <Typography variant="h5" className={classes.title}>Signup</Typography>
+                        <form noValidate onSubmit={this.handleSubmit} method="POST">
+                            <TextField id="email" name="email" type="email" label="Email" className={classes.textField}
+                                value={this.state.email} onChange={this.handleChange} fullWidth
+                                error={errors.email ? true : false}
+                                helperText={errors.email} />
+                            <TextField id="password" name="password" type="password" label="Password" className={classes.textField}
+                                value={this.state.password} onChange={this.handleChange} fullWidth
+                                error={errors.password ? true : false}
+                                helperText={errors.password} />
+                            <TextField id="confirmPassword" name="confirmPassword" type="password" label="Confirm Password" className={classes.textField}
+                                value={this.state.confirmPassword} onChange={this.handleChange} fullWidth
+                                error={errors.confirmPassword ? true : false}
+                                helperText={errors.confirmPassword} />
+                            <TextField id="handle" name="handle" type="text" label="Handle" className={classes.textField}
+                                value={this.state.handle} onChange={this.handleChange} fullWidth
+                                error={errors.handle ? true : false}
+                                helperText={errors.handle} />
+                            {errors.general && <Typography variant="body2" className={classes.errorLogin}>{errors.general}</Typography>}
+                            <Button type="submit" variant="contained" color="primary" className={classes.button}
+                                disabled={loading} fullWidth>
+                                Signup
                             {loading && <CircularProgress color="secondary" className={classes.progress} />}
-                        </Button><br />
-                        <small>Have an account ? Login <strong><Link to="/login">here</Link></strong></small>
-                    </form>
+                            </Button><br />
+                            <small>Have an account ? Login <strong><Link to="/login">here</Link></strong></small>
+                        </form>
+                    </Card>
                 </Grid>
-                <Grid item sm />
             </Grid>
         )
     }

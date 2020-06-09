@@ -74,12 +74,12 @@ export class home extends Component {
         return (
             <div>
                 <Grid container spacing={2}>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} md={8}>
                         <Sort />
                         {displayScream}
                         {displayPagination}
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item md={4}>
                         <Profile />
                         {/* <p>Profile</p> */}
                     </Grid>
