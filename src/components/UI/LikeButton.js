@@ -6,6 +6,11 @@ import { Tooltip, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { likeScream, unlikeScream } from '../../redux/actions/dataActions';
+import withStyles from '@material-ui/core/styles/withStyles'
+
+const styles = (theme) => ({
+    ...theme.spread
+})
 
 export class LikeButton extends Component {
 
@@ -28,10 +33,11 @@ export class LikeButton extends Component {
         const {
             user: {
                 authenticated
-            }
+            }, 
+            classes
         } = this.props;
         const likeButton = !authenticated ? (
-            <Tooltip title="Like">
+            <Tooltip title="Like" className={classes.tooltip}>
                 <IconButton>
                     <Link to="/login">
                         <FavoriteBorderIcon color="secondary" />
@@ -40,13 +46,13 @@ export class LikeButton extends Component {
             </Tooltip>
         ) :
             this.likedScream() === true ? (
-                <Tooltip title="Unlike">
+                <Tooltip title="Unlike" className={classes.tooltip}>
                     <IconButton onClick={this.unlikeScream}>
                         <FavoriteIcon color="secondary" />
                     </IconButton>
                 </Tooltip>
             ) : (
-                    <Tooltip title="Like">
+                    <Tooltip title="Like" className={classes.tooltip}>
                         <IconButton onClick={this.likeScream}>
                             <FavoriteBorderIcon color="secondary" />
                         </IconButton>
@@ -76,5 +82,5 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LikeButton)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(LikeButton))
 

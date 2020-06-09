@@ -8,9 +8,9 @@ import Scream from '../components/Scream/Scream';
 import { getScreamsByFollowing } from '../redux/actions/dataActions';
 import UserFollowing from '../components/User/UserFollowing';
 
-const styles = {
-
-}
+const styles = (theme) => ({
+    ...theme.spread
+})
 
 export class following extends Component {
     constructor(props) {
@@ -35,11 +35,11 @@ export class following extends Component {
         )
         return (
             <div>
-                <Grid container spacing={2}>
-                    <Grid item xs={8}>
+                <Grid container spacing={2} className={classes.changePosition}>
+                    <Grid item xs={12} sm={8}>
                         {displayScreams}
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item sm={4}>
                         {/* <p>Profile</p> */}
                         <Typography variant="h6"><strong>My following user</strong></Typography>
                         <UserFollowing/>

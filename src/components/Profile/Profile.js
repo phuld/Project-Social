@@ -19,7 +19,10 @@ const styles = {
         width: '100%',
         padding: 20,
         boxSizing: 'border-box',
-        lineHeight: '1.5'
+        lineHeight: '1.5', 
+        // '@media(max-width: 599px)': {
+        //     display: 'none'
+        // }
     },
     profileImage: {
         width: '170px',

@@ -14,7 +14,8 @@ import ScreamDialog from './ScreamDialog';
 import LikeButton from '../UI/LikeButton';
 import ActionScream from './ActionScream';
 
-const styles = {
+const styles = (theme) => ({
+    ...theme.spread,
     card: {
         display: 'flex',
         marginBottom: 20,
@@ -23,10 +24,16 @@ const styles = {
     image: {
         minWidth: 170,
         height: 170,
-        backgroundSize: 'cover'
+        backgroundSize: 'cover', 
+        "@media(max-width:700px)" : {
+            minWidth: 100, 
+            height: 'auto'
+        }
     },
     cardContent: {
-
+        "@media(max-width: 700px)":{
+            paddingBottom: '40px !important'
+        }
     }, 
     actionButton: {
         position: 'absolute', 
@@ -41,8 +48,9 @@ const styles = {
         WebkitLineClamp: 2,
         display: '-webkit-box', 
         WebkitBoxOrient: 'vertical'
-    }
-}
+    },
+       
+})
 
 export class Scream extends Component {
 
@@ -81,7 +89,7 @@ export class Scream extends Component {
                     <div className={classes.actionButton}>
                         <LikeButton screamId={screamId} />
                         <span>{likeCount} likes</span>
-                        <Tooltip title="Comments">
+                        <Tooltip title="Comments" className={classes.tooltip}>
                             <IconButton>
                                 <ChatBubbleIcon color="primary" />
                             </IconButton>

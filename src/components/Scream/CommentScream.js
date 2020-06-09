@@ -32,10 +32,10 @@ export class CommentScream extends Component {
                         <Fragment key={index}>
                             <Grid item sm={12} key={index}>
                                 <Grid container spacing={2}>
-                                    <Grid item sm={2}>
+                                    <Grid item xs={2}>
                                         <img src={userImage} alt="comment" className={classes.commentImage}/>
                                     </Grid>
-                                    <Grid item sm={10}> 
+                                    <Grid item xs={10}> 
                                         <div className={classes.commentData}>
                                             <Typography 
                                                 variant="h6"

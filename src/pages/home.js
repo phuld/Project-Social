@@ -9,9 +9,13 @@ import ScreamSkeletons from '../utils/ScreamSkeletons';
 import Paginations from '../components/Paginations/Paginations';
 import Sort from '../components/UI/Sort';
 import { changeType } from '../redux/actions/dataActions';
+import withStyles from '@material-ui/core/styles/withStyles'
+
+const styles = (theme) => ({
+    ...theme.spread
+})
 
 export class home extends Component {
-
 
     componentDidMount() {
         const queryString = new URLSearchParams(this.props.location.search);
@@ -59,7 +63,7 @@ export class home extends Component {
     }
 
     render() {
-        const { screams, loadingData, currentPage, loadingUser, user: { blocks } } = this.props;
+        const { screams, loadingData, currentPage, loadingUser, user: { blocks }, classes } = this.props;
         const displayScream = (!loadingData && !loadingUser) ?
             (screams.map(scream => {
                 if (blocks.findIndex(block => block.screamId === scream.screamId) === -1) {
@@ -73,13 +77,13 @@ export class home extends Component {
         ) : null;
         return (
             <div>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={8}>
+                <Grid container spacing={2} className={classes.changePosition}>
+                    <Grid item xs={12} sm={8}>
                         <Sort />
                         {displayScream}
                         {displayPagination}
                     </Grid>
-                    <Grid item md={4}>
+                    <Grid item sm={4}>
                         <Profile />
                         {/* <p>Profile</p> */}
                     </Grid>
@@ -90,7 +94,8 @@ export class home extends Component {
 }
 
 home.propTypes = {
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired, 
+    classes: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
@@ -113,4 +118,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(home)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(home))

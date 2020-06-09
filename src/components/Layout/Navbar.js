@@ -39,7 +39,7 @@ export class Navbar extends Component {
                         <PostScream />
                         <Tooltip title="My following post">
                             <IconButton component={Link} to="/following">
-                                <GroupIcon className={classes.icon}/>
+                                <GroupIcon className={classes.icon} />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Home">

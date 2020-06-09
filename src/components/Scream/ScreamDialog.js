@@ -15,11 +15,16 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import CommentScream from './CommentScream';
 import CommentForm from './CommentForm';
 
-const styles = {
+const styles = (theme) => ({
+    ...theme.spread,
     profileImage: {
-        width: 170,
+        maxWidth: 170,
         height: 170,
-        borderRadius: '50%'
+        borderRadius: '50%', 
+        "@media(max-width: 599px)":{
+            maxWidth: 100, 
+            height: 'auto'
+        }
     },
     closeButton: {
         position: 'absolute',
@@ -46,7 +51,7 @@ const styles = {
     body: {
         fontSize: '1.3rem'
     }
-}
+})
 
 export class ScreamDialog extends Component {
     constructor(props) {
@@ -117,10 +122,10 @@ export class ScreamDialog extends Component {
             </div>
         ) : (
                 <Grid container spacing={2}>
-                    <Grid item sm={4}>
+                    <Grid item xs={4}>
                         <img src={userImage} alt="" className={classes.profileImage} />
                     </Grid>
-                    <Grid item sm={8}>
+                    <Grid item xs={8}>
                         <Typography
                             component={Link}
                             to={`/user/${userHandle}`}
@@ -142,7 +147,7 @@ export class ScreamDialog extends Component {
                         <br />
                         <LikeButton screamId={screamId} />
                         <span>{likeCount} likes</span>
-                        <Tooltip title="Comments">
+                        <Tooltip title="Comments" className={classes.tooltip}>
                             <IconButton>
                                 <ChatBubbleIcon color="primary" />
                             </IconButton>

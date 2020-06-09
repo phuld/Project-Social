@@ -38,6 +38,16 @@ export default {
         progress: {
             position: 'absolute'
     
+        }, 
+        tooltip: {
+            "@media(max-width: 700px)": {
+                padding: 0
+            }
+        }, 
+        changePosition: {
+            "@media(max-width: 599px)": {
+                flexDirection: 'column-reverse'
+            }
         }
     }
 }

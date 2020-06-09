@@ -9,9 +9,9 @@ import ScreamSkeletons from '../utils/ScreamSkeletons';
 import Paginations from '../components/Paginations/Paginations';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = {
-
-}
+const styles = (theme) => ({
+    ...theme.spread
+})
 
 export class user extends Component {
 
@@ -74,7 +74,8 @@ export class user extends Component {
         const {
             loading,
             screams,
-            currentPage
+            currentPage, 
+            classes
         } = this.props;
         const { screamIdParam } = this.state;
         const screamMarkup = loading ? (
@@ -96,7 +97,7 @@ export class user extends Component {
             <Paginations postPerPage={10} defaultPage={currentPage} changePagination={this.changePagination} />
         ) : null;
         return (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.changePosition}>
                 <Grid item sm={8}>
                     {screamMarkup}
                     {displayPagination}

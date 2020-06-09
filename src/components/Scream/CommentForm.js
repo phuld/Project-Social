@@ -61,7 +61,7 @@ export class CommentForm extends Component {
         } = this.props;
         const {  errors } = this.state;
         const commentFormMarkup = authenticated ? (
-            <Grid item sm={12} className={classes.form}>
+            <Grid item xs={12} className={classes.form}>
                 <form onSubmit={this.handleSubmit} >
                     <TextField
                         id="body"
